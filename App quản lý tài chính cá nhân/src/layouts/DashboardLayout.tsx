@@ -6,10 +6,11 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Wallet, PieChart, Brain, Bell,
   Target, Settings, Menu, X, ChevronRight,
-  TrendingUp, LogOut, Sparkles, User,
+  TrendingUp, LogOut, Sparkles,
 } from 'lucide-react';
+import { useUser as useClerkUser, useClerk, UserButton } from '@clerk/clerk-react';
 import { cn } from '../utils/helpers';
-import { useFinanceStore, useUser, useUnreadAlerts, useUnreadAlertsCount } from '../stores/useFinanceStore';
+import { useFinanceStore, useUnreadAlerts, useUnreadAlertsCount } from '../stores/useFinanceStore';
 
 // ── Nav Config ────────────────────────────────────────────────────
 const navItems = [
@@ -27,8 +28,13 @@ const bottomNavItems = [
 
 // ── Sidebar ───────────────────────────────────────────────────────
 function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const user = useUser();
+  const { user } = useClerkUser();
+  const { signOut } = useClerk();
   const location = useLocation();
+
+  const displayName = user?.fullName || user?.firstName || user?.emailAddresses?.[0]?.emailAddress?.split('@')[0] || 'Người dùng';
+  const email = user?.primaryEmailAddress?.emailAddress || '';
+  const avatarUrl = user?.imageUrl;
 
   return (
     <>
@@ -124,15 +130,32 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
 
         {/* User Card */}
         <div className="p-3 border-t border-slate-800/60">
-          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800/60 transition-colors cursor-pointer group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
-              {user.name.charAt(0)}
-            </div>
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/30 border border-slate-700/30">
+            {/* Avatar */}
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt={displayName}
+                className="w-9 h-9 rounded-xl object-cover flex-shrink-0 ring-2 ring-brand-500/30"
+              />
+            ) : (
+              <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                {displayName.charAt(0).toUpperCase()}
+              </div>
+            )}
+            {/* Info */}
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-slate-200 truncate">{user.name}</p>
-              <p className="text-xs text-slate-500 truncate">{user.email}</p>
+              <p className="text-sm font-semibold text-slate-200 truncate">{displayName}</p>
+              <p className="text-xs text-slate-500 truncate">{email}</p>
             </div>
-            <LogOut className="w-4 h-4 text-slate-600 group-hover:text-slate-400 transition-colors" />
+            {/* Sign out button */}
+            <button
+              onClick={() => signOut({ redirectUrl: '/sign-in' })}
+              title="Đăng xuất"
+              className="p-1.5 rounded-lg text-slate-600 hover:text-danger-400 hover:bg-danger-500/10 transition-all duration-200 flex-shrink-0"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </aside>
@@ -216,10 +239,24 @@ function TopNavbar({ onMenuClick }: { onMenuClick: () => void }) {
           )}
         </div>
 
-        {/* User avatar */}
-        <button className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center text-sm font-bold text-white">
-          <User className="w-4 h-4" />
-        </button>
+        {/* User avatar – Clerk UserButton */}
+        <UserButton
+          afterSignOutUrl="/sign-in"
+          appearance={{
+            elements: {
+              avatarBox: 'w-9 h-9 rounded-xl ring-2 ring-brand-500/30 hover:ring-brand-500/60 transition-all',
+              userButtonPopoverCard: 'bg-slate-900 border border-slate-700 shadow-xl',
+              userButtonPopoverActionButton: 'text-slate-300 hover:text-white hover:bg-slate-800',
+              userButtonPopoverActionButtonText: 'text-slate-300',
+              userButtonPopoverFooter: 'hidden',
+            },
+            variables: {
+              colorBackground: '#0f172a',
+              colorText: '#f1f5f9',
+              colorPrimary: '#6366f1',
+            },
+          }}
+        />
       </div>
     </header>
   );
