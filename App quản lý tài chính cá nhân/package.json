@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "db": "json-server db.json --port 3001",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
@@ -27,6 +28,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.2",
+    "concurrently": "^10.0.4",
+    "json-server": "^1.0.0-beta.15",
     "oxlint": "^1.71.0",
     "postcss": "^8.5.17",
     "tailwindcss": "^4.3.2",

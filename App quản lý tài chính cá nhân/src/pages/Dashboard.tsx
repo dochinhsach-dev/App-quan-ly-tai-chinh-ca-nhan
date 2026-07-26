@@ -1,11 +1,12 @@
 // ─────────────────────────────────────────────────────────────────
 //  Dashboard Page – Main grid with summary cards + charts
 // ─────────────────────────────────────────────────────────────────
-import { useSummary, useHealthScore, useGoals } from '../stores/useFinanceStore';
+import { useLiveSummary, useHealthScore, useGoals } from '../stores/useFinanceStore';
 import { cn, formatVND, formatCompact, getProgressColor, getScoreColor, getTrend } from '../utils/helpers';
 import ExpenseChart from '../components/finance/ExpenseChart';
 import RecentTransactions from '../components/finance/RecentTransactions';
 import SmartAlerts from '../components/finance/SmartAlerts';
+import { useUser as useClerkUser } from '@clerk/clerk-react';
 import {
   Wallet, TrendingUp, TrendingDown, PiggyBank,
   Heart, ArrowUpRight, ArrowDownRight, Target, Trophy,
@@ -55,6 +56,14 @@ function SummaryCard({ label, value, change, icon: Icon, iconBg, iconColor, form
       </div>
     </div>
   );
+}
+
+// ── Greeting helper ─────────────────────────────────────────────────────
+function getGreeting(): string {
+  const h = new Date().getHours();
+  if (h < 12) return 'Chào buổi sáng';
+  if (h < 18) return 'Chào buổi chiều';
+  return 'Chào buổi tối';
 }
 
 // ── Health Score Ring ─────────────────────────────────────────────
@@ -170,9 +179,10 @@ function GoalProgressCard() {
   );
 }
 
-// ── Balance Card (large) ──────────────────────────────────────────
+// ── Balance Card (large) ─────────────────────────────────────────────────────
 function BalanceHeroCard() {
-  const summary = useSummary();
+  const summary = useLiveSummary();
+  const monthLabel = `T${new Date().getMonth() + 1}`;
 
   return (
     <div className="card p-6 bg-gradient-to-br from-brand-600/20 via-surface-900 to-surface-900 border-brand-500/20 animate-fade-in col-span-full md:col-span-2 lg:col-span-1">
@@ -184,11 +194,11 @@ function BalanceHeroCard() {
 
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-success-500/10 border border-success-500/20 rounded-xl p-3">
-          <p className="text-[10px] text-slate-400 mb-1">Thu nhập T7</p>
+          <p className="text-[10px] text-slate-400 mb-1">Thu nhập {monthLabel}</p>
           <p className="text-sm font-bold text-success-400">+{formatCompact(summary.monthlyIncome)}đ</p>
         </div>
         <div className="bg-danger-500/10 border border-danger-500/20 rounded-xl p-3">
-          <p className="text-[10px] text-slate-400 mb-1">Chi tiêu T7</p>
+          <p className="text-[10px] text-slate-400 mb-1">Chi tiêu {monthLabel}</p>
           <p className="text-sm font-bold text-danger-400">-{formatCompact(summary.monthlyExpenses)}đ</p>
         </div>
       </div>
@@ -198,15 +208,42 @@ function BalanceHeroCard() {
 
 // ── Dashboard Page ────────────────────────────────────────────────
 export default function Dashboard() {
-  const summary = useSummary();
+  const summary = useLiveSummary();
+  const { user } = useClerkUser();
+
+  // Pick the friendliest name available from Clerk
+  const firstName =
+    user?.firstName ||
+    user?.fullName?.split(' ').at(-1) ||
+    user?.primaryEmailAddress?.emailAddress?.split('@')[0] ||
+    'bạn';
 
   return (
     <div className="space-y-6 animate-in">
       {/* Welcome banner */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-slate-100">Chào buổi sáng, Minh Anh! 👋</h2>
-          <p className="text-sm text-slate-400 mt-0.5">Đây là tổng quan tài chính của bạn hôm nay.</p>
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div className="flex items-center gap-3">
+          {user?.imageUrl ? (
+            <img
+              src={user.imageUrl}
+              alt={firstName}
+              className="w-11 h-11 rounded-xl object-cover ring-2 ring-brand-500/30 flex-shrink-0"
+            />
+          ) : (
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">
+              {firstName.charAt(0).toUpperCase()}
+            </div>
+          )}
+          <div>
+            <h2 className="text-xl font-bold text-slate-100">
+              {getGreeting()}, {firstName}! 👋
+            </h2>
+            <p className="text-sm text-slate-400 mt-0.5">Đây là tổng quan tài chính của bạn hôm nay.</p>
+          </div>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 bg-surface-900 border border-slate-800/70 rounded-xl px-3 py-2">
+          <span className="w-2 h-2 rounded-full bg-success-400 animate-pulse flex-shrink-0" />
+          Dữ liệu cập nhật theo thời gian thực
         </div>
       </div>
 

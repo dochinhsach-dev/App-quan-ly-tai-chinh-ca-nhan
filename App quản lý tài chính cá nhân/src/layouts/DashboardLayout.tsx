@@ -11,6 +11,7 @@ import {
 import { useUser as useClerkUser, useClerk, UserButton } from '@clerk/clerk-react';
 import { cn } from '../utils/helpers';
 import { useFinanceStore, useUnreadAlerts, useUnreadAlertsCount } from '../stores/useFinanceStore';
+import UserDataSync from '../components/UserDataSync';
 
 // ── Nav Config ────────────────────────────────────────────────────
 const navItems = [
@@ -286,12 +287,15 @@ function PageTitle() {
   );
 }
 
-// ── Main Layout ───────────────────────────────────────────────────
+// ── Main Layout ────────────────────────────────────────────────────
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="flex h-screen overflow-hidden bg-surface-950">
+      {/* Sync Clerk user → Zustand store (user-scoped localStorage) */}
+      <UserDataSync />
+
       {/* Sidebar */}
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
