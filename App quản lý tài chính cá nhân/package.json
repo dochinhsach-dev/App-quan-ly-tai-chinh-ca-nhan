@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "db": "json-server db.json --port 3001",
+    "dev:all": "concurrently -k -n \"Vite,DB\" -c \"cyan,yellow\" \"vite\" \"json-server db.json --port 3001\"",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

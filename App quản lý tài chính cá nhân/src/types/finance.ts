@@ -41,14 +41,17 @@ export interface Transaction {
 // ── Budget ────────────────────────────────────────────────────────
 export interface Budget {
   id: string;
+  name?: string;          // Display name (optional, falls back to category name)
   categoryId: string;
   amount: number;
   spent: number;
-  period: 'monthly' | 'weekly' | 'yearly';
+  period: 'monthly' | 'weekly' | 'quarterly' | 'yearly' | 'custom';
   startDate: string;
   endDate: string;
   alertThreshold: number; // 0–100 (%)
   currency: string;
+  isRecurring?: boolean;  // Auto-create for next period
+  note?: string;          // Optional notes
 }
 
 export interface BudgetWithCategory extends Budget {

@@ -1,5 +1,6 @@
 // Pages barrel – re-export all page components
 export { default as Transactions } from './Transactions';
+export { default as Budgets } from './Budgets';
 
 // Stub pages – sẽ được mở rộng ở các bước sau
 import { Construction } from 'lucide-react';
@@ -23,7 +24,6 @@ function ComingSoon({ title }: { title: string }) {
   );
 }
 
-export function Budgets()      { return <ComingSoon title="Ngân sách & Chi tiêu" />; }
 export function Goals()        { return <ComingSoon title="Mục tiêu Tài chính" />; }
 export function Reminders()    { return <ComingSoon title="Nhắc nhở & Lịch hóa đơn" />; }
 export function SettingsPage() { return <ComingSoon title="Cài đặt" />; }
