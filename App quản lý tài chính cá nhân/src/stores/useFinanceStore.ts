@@ -7,7 +7,7 @@ import { devtools } from 'zustand/middleware';
 import { useMemo } from 'react';
 import type {
   Transaction, Budget, Category, Alert,
-  AIInsight, FinancialGoal, UserProfile,
+  AIInsight, FinancialGoal, GoalContribution, UserProfile,
   DashboardSummary, HealthScore, SpendingHabit, BudgetWithCategory,
 } from '../types/finance';
 import {
@@ -94,8 +94,12 @@ interface FinanceState {
 
   // Goal Actions
   addGoal: (goal: Omit<FinancialGoal, 'id' | 'createdAt'>) => Promise<void>;
+  updateGoal: (id: string, updates: Partial<FinancialGoal>) => Promise<void>;
   updateGoalProgress: (id: string, amount: number) => Promise<void>;
   deleteGoal: (id: string) => Promise<void>;
+  addContribution: (goalId: string, contrib: Omit<GoalContribution, 'id' | 'createdAt'>) => Promise<void>;
+  updateContribution: (goalId: string, contribId: string, updates: Partial<GoalContribution>) => Promise<void>;
+  deleteContribution: (goalId: string, contribId: string) => Promise<void>;
 
   // User Actions
   updateUser: (updates: Partial<UserProfile>) => void;
@@ -428,6 +432,17 @@ export const useFinanceStore = create<FinanceStore>()(
         }
       },
 
+      updateGoal: async (id, updates) => {
+        const prev = get().goals.find((g) => g.id === id);
+        set((s) => ({ goals: s.goals.map((g) => g.id === id ? { ...g, ...updates } : g) }));
+        try {
+          await goalsApi.update(id, updates);
+        } catch (err) {
+          console.error('[updateGoal] API error:', err);
+          if (prev) set((s) => ({ goals: s.goals.map((g) => g.id === id ? prev : g) }));
+        }
+      },
+
       updateGoalProgress: async (id, amount) => {
         const prev = get().goals.find((g) => g.id === id);
         set((s) => ({
@@ -437,7 +452,7 @@ export const useFinanceStore = create<FinanceStore>()(
             return {
               ...g,
               currentAmount: newAmt,
-              status: newAmt >= g.targetAmount ? 'achieved' : g.status,
+              status: newAmt >= g.targetAmount ? 'completed' : g.status,
             };
           }),
         }));
@@ -457,6 +472,62 @@ export const useFinanceStore = create<FinanceStore>()(
         catch (err) {
           console.error('[deleteGoal]', err);
           if (prev) set((s) => ({ goals: [...s.goals, prev] }));
+        }
+      },
+
+      addContribution: async (goalId, contrib) => {
+        const goal = get().goals.find((g) => g.id === goalId);
+        if (!goal) return;
+        const newContrib: GoalContribution = {
+          ...contrib,
+          id: generateId('contrib'),
+          createdAt: now(),
+        };
+        const newContribs = [...(goal.contributions ?? []), newContrib];
+        const newCurrent = goal.initialAmount + newContribs.reduce((s, c) => s + c.amount, 0);
+        const newStatus = newCurrent >= goal.targetAmount ? 'completed' : goal.status;
+        const updates = { contributions: newContribs, currentAmount: newCurrent, status: newStatus };
+        set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? { ...g, ...updates } : g) }));
+        try {
+          await goalsApi.update(goalId, updates);
+        } catch (err) {
+          console.error('[addContribution] API error:', err);
+          set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? goal : g) }));
+        }
+      },
+
+      updateContribution: async (goalId, contribId, updates) => {
+        const goal = get().goals.find((g) => g.id === goalId);
+        if (!goal) return;
+        const newContribs = (goal.contributions ?? []).map((c) =>
+          c.id === contribId ? { ...c, ...updates } : c
+        );
+        const newCurrent = goal.initialAmount + newContribs.reduce((s, c) => s + c.amount, 0);
+        const newStatus = newCurrent >= goal.targetAmount ? 'completed' : goal.status;
+        const goalUpdates = { contributions: newContribs, currentAmount: newCurrent, status: newStatus };
+        set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? { ...g, ...goalUpdates } : g) }));
+        try {
+          await goalsApi.update(goalId, goalUpdates);
+        } catch (err) {
+          console.error('[updateContribution] API error:', err);
+          set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? goal : g) }));
+        }
+      },
+
+      deleteContribution: async (goalId, contribId) => {
+        const goal = get().goals.find((g) => g.id === goalId);
+        if (!goal) return;
+        const newContribs = (goal.contributions ?? []).filter((c) => c.id !== contribId);
+        const newCurrent = goal.initialAmount + newContribs.reduce((s, c) => s + c.amount, 0);
+        const newStatus = newCurrent >= goal.targetAmount ? 'completed' :
+          (goal.status === 'completed' ? 'active' : goal.status);
+        const goalUpdates = { contributions: newContribs, currentAmount: newCurrent, status: newStatus as import('../types/finance').GoalLifecycleStatus };
+        set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? { ...g, ...goalUpdates } : g) }));
+        try {
+          await goalsApi.update(goalId, goalUpdates);
+        } catch (err) {
+          console.error('[deleteContribution] API error:', err);
+          set((s) => ({ goals: s.goals.map((g) => g.id === goalId ? goal : g) }));
         }
       },
 

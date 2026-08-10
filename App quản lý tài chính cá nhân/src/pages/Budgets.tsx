@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis,
-  Tooltip, ResponsiveContainer, CartesianGrid, Legend, LineChart, Line, Area, AreaChart,
+  Tooltip, ResponsiveContainer, CartesianGrid, Legend,
 } from 'recharts';
 import { cn, formatVND, formatCompact } from '../utils/helpers';
 import { useTransactions, useCategories, useFinanceStore } from '../stores/useFinanceStore';
@@ -82,6 +82,8 @@ function computeSpent(budget: Budget, transactions: Transaction[]): number {
     })
     .reduce((s, tx) => s + tx.amount, 0);
 }
+
+
 
 function getStatus(pct: number, threshold: number) {
   if (pct > 100)       return 'over'    as const;

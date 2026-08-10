@@ -22,7 +22,7 @@ async function http<T>(url: string, options?: RequestInit): Promise<T> {
 
 function get<T>(path: string)         { return http<T>(`${BASE}${path}`); }
 function post<T>(path: string, body: unknown)  { return http<T>(`${BASE}${path}`, { method: 'POST',   body: JSON.stringify(body) }); }
-function put<T>(path: string, body: unknown)   { return http<T>(`${BASE}${path}`, { method: 'PUT',    body: JSON.stringify(body) }); }
+export function put<T>(path: string, body: unknown) { return http<T>(`${BASE}${path}`, { method: 'PUT', body: JSON.stringify(body) }); }
 function patch<T>(path: string, body: unknown) { return http<T>(`${BASE}${path}`, { method: 'PATCH',  body: JSON.stringify(body) }); }
 function del(path: string)            { return http<unknown>(`${BASE}${path}`, { method: 'DELETE' }); }
 

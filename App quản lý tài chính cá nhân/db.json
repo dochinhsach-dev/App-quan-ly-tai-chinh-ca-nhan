@@ -543,166 +543,63 @@
   ],
   "goals": [
     {
-      "id": "goal-01",
+      "id": "goal-001",
       "userId": "user-001",
-      "title": "Quỹ khẩn cấp 6 tháng",
-      "iconEmoji": "🛡️",
-      "color": "#4ade80",
-      "description": "Xây dựng quỹ dự phòng đủ cho 6 tháng chi tiêu",
-      "targetAmount": 72000000,
-      "currentAmount": 36000000,
-      "currency": "VND",
-      "deadline": "2026-07-01",
-      "status": "on-track",
-      "categoryId": "cat-08",
-      "milestones": [
-        {
-          "id": "m-01",
-          "title": "1 tháng",
-          "targetAmount": 12000000,
-          "achievedAt": "2024-06-01",
-          "isAchieved": true
-        },
-        {
-          "id": "m-02",
-          "title": "3 tháng",
-          "targetAmount": 36000000,
-          "achievedAt": "2025-03-01",
-          "isAchieved": true
-        },
-        {
-          "id": "m-03",
-          "title": "6 tháng",
-          "targetAmount": 72000000,
-          "isAchieved": false
-        }
-      ],
-      "createdAt": "2024-01-15T00:00:00Z"
-    },
-    {
-      "id": "goal-02",
-      "userId": "user-001",
-      "title": "Du lịch Nhật Bản",
-      "iconEmoji": "🗾",
-      "color": "#818cf8",
-      "description": "Tiết kiệm cho chuyến đi Nhật Bản 10 ngày",
+      "title": "Mua MacBook Pro",
+      "description": "Mua laptop mới để làm việc và học tập",
       "targetAmount": 30000000,
-      "currentAmount": 18500000,
-      "currency": "VND",
-      "deadline": "2025-12-31",
-      "status": "on-track",
-      "milestones": [
-        {
-          "id": "m-04",
-          "title": "Nửa đường",
-          "targetAmount": 15000000,
-          "achievedAt": "2025-05-01",
-          "isAchieved": true
-        },
-        {
-          "id": "m-05",
-          "title": "Đặt vé",
-          "targetAmount": 22000000,
-          "isAchieved": false
-        }
-      ],
-      "createdAt": "2025-01-01T00:00:00Z"
-    },
-    {
-      "id": "goal-03",
-      "userId": "user-001",
-      "title": "Mua xe máy mới",
-      "iconEmoji": "🛵",
-      "color": "#f472b6",
-      "description": "Tích lũy mua Honda Air Blade 2025",
-      "targetAmount": 55000000,
       "currentAmount": 10000000,
+      "initialAmount": 10000000,
       "currency": "VND",
-      "deadline": "2026-06-30",
-      "status": "at-risk",
-      "milestones": [],
-      "createdAt": "2025-06-01T00:00:00Z"
-    },
-    {
-      "id": "0bnEyt2AF0k",
-      "title": "Quỹ khẩn cấp 6 tháng",
-      "iconEmoji": "🛡️",
-      "color": "#4ade80",
-      "description": "Xây dựng quỹ dự phòng đủ cho 6 tháng chi tiêu",
-      "targetAmount": 72000000,
-      "currentAmount": 36000000,
-      "currency": "VND",
-      "deadline": "2026-07-01",
-      "status": "on-track",
-      "categoryId": "cat-08",
+      "startDate": "2025-01-01",
+      "deadline": "2026-12-31",
+      "status": "active",
+      "goalCategory": "tech",
+      "priority": "high",
+      "iconEmoji": "💻",
+      "color": "#6366f1",
+      "contributions": [],
       "milestones": [
         {
-          "id": "m-01",
-          "title": "1 tháng",
-          "targetAmount": 12000000,
-          "achievedAt": "2024-06-01",
-          "isAchieved": true
+          "id": "ms-001",
+          "title": "Tiết kiệm 10 triệu",
+          "targetAmount": 10000000,
+          "isAchieved": true,
+          "achievedAt": "2025-06-01T00:00:00Z"
         },
         {
-          "id": "m-02",
-          "title": "3 tháng",
-          "targetAmount": 36000000,
-          "achievedAt": "2025-03-01",
-          "isAchieved": true
-        },
-        {
-          "id": "m-03",
-          "title": "6 tháng",
-          "targetAmount": 72000000,
+          "id": "ms-002",
+          "title": "Tiết kiệm 20 triệu",
+          "targetAmount": 20000000,
           "isAchieved": false
         }
       ],
-      "createdAt": "2024-01-15T00:00:00Z",
-      "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
-    },
-    {
-      "id": "St2bFM3cqwk",
-      "title": "Du lịch Nhật Bản",
-      "iconEmoji": "🗾",
-      "color": "#818cf8",
-      "description": "Tiết kiệm cho chuyến đi Nhật Bản 10 ngày",
-      "targetAmount": 30000000,
-      "currentAmount": 18500000,
-      "currency": "VND",
-      "deadline": "2025-12-31",
-      "status": "on-track",
-      "milestones": [
-        {
-          "id": "m-04",
-          "title": "Nửa đường",
-          "targetAmount": 15000000,
-          "achievedAt": "2025-05-01",
-          "isAchieved": true
-        },
-        {
-          "id": "m-05",
-          "title": "Đặt vé",
-          "targetAmount": 22000000,
-          "isAchieved": false
-        }
-      ],
+      "reminderEnabled": true,
+      "reminderFrequency": "monthly",
       "createdAt": "2025-01-01T00:00:00Z",
-      "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+      "updatedAt": "2025-01-01T00:00:00Z"
     },
     {
-      "id": "TX2y-1TqTGs",
-      "title": "Mua xe máy mới",
-      "iconEmoji": "🛵",
-      "color": "#f472b6",
-      "description": "Tích lũy mua Honda Air Blade 2025",
-      "targetAmount": 55000000,
-      "currentAmount": 10000000,
+      "id": "goal-002",
+      "userId": "user-001",
+      "title": "Du lịch Đà Nẵng",
+      "description": "Chuyến du lịch gia đình hè 2026",
+      "targetAmount": 15000000,
+      "currentAmount": 5000000,
+      "initialAmount": 5000000,
       "currency": "VND",
-      "deadline": "2026-06-30",
-      "status": "at-risk",
+      "startDate": "2025-06-01",
+      "deadline": "2026-07-01",
+      "status": "active",
+      "goalCategory": "travel",
+      "priority": "medium",
+      "iconEmoji": "✈️",
+      "color": "#22d3ee",
+      "contributions": [],
       "milestones": [],
+      "reminderEnabled": false,
       "createdAt": "2025-06-01T00:00:00Z",
-      "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+      "updatedAt": "2025-06-01T00:00:00Z"
     }
   ],
   "alerts": [

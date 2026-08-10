@@ -125,7 +125,7 @@ function HealthScoreCard() {
 // ── Goal Progress Card ────────────────────────────────────────────
 function GoalProgressCard() {
   const goals = useGoals();
-  const active = goals.filter((g) => g.status !== 'achieved').slice(0, 3);
+  const active = goals.filter((g) => g.status !== 'completed' && g.status !== 'cancelled').slice(0, 3);
 
   return (
     <div className="card p-5 animate-fade-in">
@@ -154,7 +154,7 @@ function GoalProgressCard() {
                 </div>
                 <span className={cn(
                   'text-xs font-bold',
-                  goal.status === 'on-track' ? 'text-success-400' : 'text-warning-400',
+                  goal.status === 'active' ? 'text-success-400' : 'text-warning-400',
                 )}>{pct}%</span>
               </div>
               <div className="progress-track h-1.5">

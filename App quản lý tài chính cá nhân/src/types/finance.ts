@@ -6,6 +6,8 @@ export type TransactionType = 'income' | 'expense' | 'transfer';
 export type RecurringInterval = 'daily' | 'weekly' | 'monthly' | 'yearly';
 export type AlertSeverity = 'info' | 'warning' | 'danger' | 'success';
 export type InsightType = 'saving' | 'spending' | 'goal' | 'habit' | 'budget';
+
+// Legacy – kept for backward compat with existing store code
 export type GoalStatus = 'on-track' | 'at-risk' | 'achieved' | 'paused';
 
 // ── Category ──────────────────────────────────────────────────────
@@ -122,20 +124,56 @@ export interface HealthScore {
   }[];
 }
 
+// ── Goal Category ─────────────────────────────────────────────────
+export type GoalCategory =
+  | 'housing'
+  | 'vehicle'
+  | 'tech'
+  | 'travel'
+  | 'education'
+  | 'personal'
+  | 'emergency'
+  | 'investment'
+  | 'other';
+
+// ── Goal Contribution (nạp/rút tiền vào mục tiêu) ────────────────
+export interface GoalContribution {
+  id: string;
+  amount: number;    // dương = nạp tiền, âm = rút tiền
+  note?: string;
+  date: string;      // ISO 8601
+  createdAt: string;
+}
+
+// ── Goal Lifecycle Status ─────────────────────────────────────────
+export type GoalLifecycleStatus =
+  | 'active'      // Đang thực hiện
+  | 'paused'      // Tạm dừng
+  | 'completed'   // Hoàn thành
+  | 'cancelled'   // Đã hủy
+  | 'overdue';    // Quá hạn
+
 // ── Goal / Milestone ──────────────────────────────────────────────
 export interface FinancialGoal {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   targetAmount: number;
-  currentAmount: number;
+  currentAmount: number;   // = initialAmount + sum(contributions)
+  initialAmount: number;   // số tiền có ban đầu khi tạo
   currency: string;
-  deadline: string;
-  status: GoalStatus;
-  categoryId?: string;
-  milestones: GoalMilestone[];
+  startDate: string;       // ISO 8601 date
+  deadline: string;        // ISO 8601 date
+  status: GoalLifecycleStatus;
+  goalCategory: GoalCategory;
+  priority: 'low' | 'medium' | 'high';
+  imageUrl?: string;       // ảnh đại diện (URL)
   iconEmoji: string;
   color: string;
+  contributions: GoalContribution[];
+  reminderEnabled: boolean;
+  reminderFrequency?: 'weekly' | 'monthly';
+  milestones: GoalMilestone[];
   createdAt: string;
 }
 

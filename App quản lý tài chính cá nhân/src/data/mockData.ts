@@ -10,10 +10,14 @@ import type {
   SpendingHabit,
   HealthScore,
   FinancialGoal,
+  GoalContribution,
   UserProfile,
   DashboardSummary,
   MonthlyChartData,
 } from '../types/finance';
+
+// suppress unused import warning
+void (null as unknown as GoalContribution);
 
 // ── User ──────────────────────────────────────────────────────────
 export const mockUser: UserProfile = {
@@ -232,31 +236,54 @@ export const mockGoals: FinancialGoal[] = [
   {
     id: 'goal-01', title: 'Quỹ khẩn cấp 6 tháng', iconEmoji: '🛡️', color: '#4ade80',
     description: 'Xây dựng quỹ dự phòng đủ cho 6 tháng chi tiêu',
-    targetAmount: 72_000_000, currentAmount: 36_000_000, currency: 'VND',
-    deadline: '2026-07-01', status: 'on-track', categoryId: 'cat-08',
+    targetAmount: 72_000_000, currentAmount: 36_000_000, initialAmount: 12_000_000,
+    currency: 'VND', startDate: '2024-01-15', deadline: '2026-12-31',
+    status: 'active', goalCategory: 'emergency', priority: 'high',
+    contributions: [
+      { id: 'c-01-1', amount: 5_000_000, note: 'Tiết kiệm tháng 1', date: '2024-02-01', createdAt: '2024-02-01T08:00:00Z' },
+      { id: 'c-01-2', amount: 5_000_000, note: 'Tiết kiệm tháng 2', date: '2024-03-01', createdAt: '2024-03-01T08:00:00Z' },
+      { id: 'c-01-3', amount: 4_000_000, note: 'Tiết kiệm tháng 3', date: '2024-04-01', createdAt: '2024-04-01T08:00:00Z' },
+      { id: 'c-01-4', amount: 5_000_000, note: 'Tiết kiệm tháng 4', date: '2024-05-01', createdAt: '2024-05-01T08:00:00Z' },
+      { id: 'c-01-5', amount: 5_000_000, note: 'Thưởng cuối năm', date: '2025-01-05', createdAt: '2025-01-05T08:00:00Z' },
+    ],
+    reminderEnabled: true, reminderFrequency: 'monthly',
     milestones: [
-      { id: 'm-01', title: '1 tháng', targetAmount: 12_000_000, achievedAt: '2024-06-01', isAchieved: true },
-      { id: 'm-02', title: '3 tháng', targetAmount: 36_000_000, achievedAt: '2025-03-01', isAchieved: true },
-      { id: 'm-03', title: '6 tháng', targetAmount: 72_000_000, isAchieved: false },
+      { id: 'm-01', title: '1 tháng chi tiêu', targetAmount: 12_000_000, achievedAt: '2024-06-01', isAchieved: true },
+      { id: 'm-02', title: '3 tháng chi tiêu', targetAmount: 36_000_000, achievedAt: '2025-03-01', isAchieved: true },
+      { id: 'm-03', title: '6 tháng chi tiêu', targetAmount: 72_000_000, isAchieved: false },
     ],
     createdAt: '2024-01-15T00:00:00Z',
   },
   {
     id: 'goal-02', title: 'Du lịch Nhật Bản', iconEmoji: '🗾', color: '#818cf8',
-    description: 'Tiết kiệm cho chuyến đi Nhật Bản 10 ngày',
-    targetAmount: 30_000_000, currentAmount: 18_500_000, currency: 'VND',
-    deadline: '2025-12-31', status: 'on-track',
+    description: 'Tiết kiệm cho chuyến đi Nhật Bản 10 ngày cùng gia đình',
+    targetAmount: 30_000_000, currentAmount: 18_500_000, initialAmount: 5_000_000,
+    currency: 'VND', startDate: '2025-01-01', deadline: '2025-12-31',
+    status: 'active', goalCategory: 'travel', priority: 'medium',
+    contributions: [
+      { id: 'c-02-1', amount: 3_000_000, note: 'Tiết kiệm tháng 1', date: '2025-02-01', createdAt: '2025-02-01T08:00:00Z' },
+      { id: 'c-02-2', amount: 3_500_000, note: 'Tiết kiệm tháng 2', date: '2025-03-01', createdAt: '2025-03-01T08:00:00Z' },
+      { id: 'c-02-3', amount: 3_000_000, note: 'Tiết kiệm tháng 3', date: '2025-04-01', createdAt: '2025-04-01T08:00:00Z' },
+      { id: 'c-02-4', amount: 4_000_000, note: 'Tiền thưởng', date: '2025-05-15', createdAt: '2025-05-15T08:00:00Z' },
+    ],
+    reminderEnabled: true, reminderFrequency: 'monthly',
     milestones: [
       { id: 'm-04', title: 'Nửa đường', targetAmount: 15_000_000, achievedAt: '2025-05-01', isAchieved: true },
-      { id: 'm-05', title: 'Đặt vé',    targetAmount: 22_000_000, isAchieved: false },
+      { id: 'm-05', title: 'Đặt vé máy bay', targetAmount: 22_000_000, isAchieved: false },
     ],
     createdAt: '2025-01-01T00:00:00Z',
   },
   {
     id: 'goal-03', title: 'Mua xe máy mới', iconEmoji: '🛵', color: '#f472b6',
-    description: 'Tích lũy mua Honda Air Blade 2025',
-    targetAmount: 55_000_000, currentAmount: 10_000_000, currency: 'VND',
-    deadline: '2026-06-30', status: 'at-risk',
+    description: 'Tích lũy mua Honda Air Blade 2025 phiên bản cao cấp',
+    targetAmount: 55_000_000, currentAmount: 10_000_000, initialAmount: 5_000_000,
+    currency: 'VND', startDate: '2025-06-01', deadline: '2026-06-30',
+    status: 'active', goalCategory: 'vehicle', priority: 'low',
+    contributions: [
+      { id: 'c-03-1', amount: 3_000_000, note: 'Tiết kiệm tháng 6', date: '2025-07-01', createdAt: '2025-07-01T08:00:00Z' },
+      { id: 'c-03-2', amount: 2_000_000, note: 'Tiết kiệm tháng 7', date: '2025-08-01', createdAt: '2025-08-01T08:00:00Z' },
+    ],
+    reminderEnabled: false,
     milestones: [],
     createdAt: '2025-06-01T00:00:00Z',
   },
