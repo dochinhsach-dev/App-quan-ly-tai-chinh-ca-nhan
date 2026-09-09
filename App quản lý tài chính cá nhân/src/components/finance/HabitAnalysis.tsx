@@ -1,14 +1,14 @@
 // ─────────────────────────────────────────────────────────────────
 //  HabitAnalysis – Spending behavior analysis component
 // ─────────────────────────────────────────────────────────────────
+import { useMemo } from 'react';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer,
   AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
 } from 'recharts';
 import { TrendingUp, TrendingDown, Minus, Clock, ShoppingBag } from 'lucide-react';
 import { cn, formatVND, formatCompact } from '../../utils/helpers';
-import { useSpendingHabits, useCategories } from '../../stores/useFinanceStore';
-import { mockMonthlyData } from '../../data/mockData';
+import { useSpendingHabits, useCategories, useTransactions } from '../../stores/useFinanceStore';
 import type { SpendingHabit } from '../../types/finance';
 
 // ── Day heatmap data ──────────────────────────────────────────────
@@ -136,17 +136,46 @@ const AreaTooltip = ({ active, payload, label }: any) => {
 export default function HabitAnalysis() {
   const habits     = useSpendingHabits();
   const categories = useCategories();
+  const transactions = useTransactions();
 
   const getCat = (id: string) => categories.find((c) => c.id === id);
+
+  const monthlyData = useMemo(() => {
+    const monthMap = new Map<string, { income: number; expenses: number }>();
+    const now = new Date();
+
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const key = `Thg ${d.getMonth() + 1}`;
+      monthMap.set(key, { income: 0, expenses: 0 });
+    }
+
+    transactions.forEach((tx) => {
+      const d = new Date(tx.date);
+      const key = `Thg ${d.getMonth() + 1}`;
+      if (monthMap.has(key)) {
+        const curr = monthMap.get(key)!;
+        if (tx.type === 'income') curr.income += tx.amount;
+        if (tx.type === 'expense') curr.expenses += tx.amount;
+      }
+    });
+
+    return Array.from(monthMap.entries()).map(([month, val]) => ({
+      month,
+      income: val.income,
+      expenses: val.expenses,
+      savings: Math.max(0, val.income - val.expenses),
+    }));
+  }, [transactions]);
 
   return (
     <div className="space-y-5">
       {/* Spending trend area chart */}
       <div className="card p-5">
         <h3 className="text-sm font-semibold text-slate-100 mb-1">Xu hướng chi tiêu 6 tháng</h3>
-        <p className="text-xs text-slate-500 mb-4">So sánh thu – chi – tiết kiệm</p>
+        <p className="text-xs text-slate-500 mb-4">So sánh thu – chi – tiết kiệm thực tế</p>
         <ResponsiveContainer width="100%" height={180}>
-          <AreaChart data={mockMonthlyData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+          <AreaChart data={monthlyData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%"  stopColor="#4ade80" stopOpacity={0.3} />

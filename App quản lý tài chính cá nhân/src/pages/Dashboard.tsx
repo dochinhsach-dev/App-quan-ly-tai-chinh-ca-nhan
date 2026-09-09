@@ -10,9 +10,23 @@ import { useUser as useClerkUser } from '@clerk/clerk-react';
 import {
   Wallet, TrendingUp, TrendingDown, PiggyBank,
   Heart, ArrowUpRight, ArrowDownRight, Target, Trophy,
+  Home, Car, Monitor, Plane, GraduationCap, User, ShieldAlert, Star,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+// ── Category icon helper (mirrors Goals.tsx) ──────────────────────
+const GOAL_CAT_ICONS: Record<string, { Icon: LucideIcon; color: string }> = {
+  housing:    { Icon: Home,          color: '#4ade80' },
+  vehicle:    { Icon: Car,           color: '#fb923c' },
+  tech:       { Icon: Monitor,       color: '#22d3ee' },
+  travel:     { Icon: Plane,         color: '#818cf8' },
+  education:  { Icon: GraduationCap, color: '#facc15' },
+  personal:   { Icon: User,          color: '#f472b6' },
+  emergency:  { Icon: ShieldAlert,   color: '#f87171' },
+  investment: { Icon: TrendingUp,    color: '#34d399' },
+  other:      { Icon: Star,          color: '#a78bfa' },
+};
+function goalCatCfg(cat?: string) { return GOAL_CAT_ICONS[cat ?? ''] ?? { Icon: Target, color: '#6366f1' }; }
 
-// ── Summary Card ──────────────────────────────────────────────────
 interface SummaryCardProps {
   label: string;
   value: number;
@@ -126,55 +140,76 @@ function HealthScoreCard() {
 function GoalProgressCard() {
   const goals = useGoals();
   const active = goals.filter((g) => g.status !== 'completed' && g.status !== 'cancelled').slice(0, 3);
+  const completedCount = goals.filter((g) => g.status === 'completed').length;
 
   return (
-    <div className="card p-5 animate-fade-in">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Target className="w-4 h-4 text-brand-400" />
-          <h3 className="text-sm font-semibold text-slate-100">Tiến độ mục tiêu</h3>
+    <div className="card p-5 animate-fade-in flex flex-col justify-between h-full">
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Target className="w-4 h-4 text-brand-400" />
+            <h3 className="text-sm font-semibold text-slate-100">Tiến độ mục tiêu</h3>
+          </div>
+          <a href="/goals" className="btn-ghost text-xs text-brand-400 px-2 py-1">Xem tất cả</a>
         </div>
-        <button className="btn-ghost text-xs text-brand-400 px-2 py-1">Xem tất cả</button>
-      </div>
 
-      <div className="space-y-4">
-        {active.map((goal) => {
-          const pct = Math.min(Math.round((goal.currentAmount / goal.targetAmount) * 100), 100);
-          return (
-            <div key={goal.id}>
-              <div className="flex items-center justify-between mb-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">{goal.iconEmoji}</span>
-                  <div>
-                    <p className="text-xs font-semibold text-slate-200">{goal.title}</p>
-                    <p className="text-[10px] text-slate-500">
-                      {formatCompact(goal.currentAmount)}đ / {formatCompact(goal.targetAmount)}đ
-                    </p>
+        {active.length === 0 ? (
+          <div className="text-center py-6 border border-dashed border-slate-800 rounded-xl my-2">
+            <Target className="w-8 h-8 text-slate-600 mx-auto mb-1.5 opacity-50" />
+            <p className="text-xs font-medium text-slate-400">Bạn chưa tạo mục tiêu nào</p>
+            <a
+              href="/goals"
+              className="inline-block mt-3 text-xs font-semibold text-brand-400 hover:underline"
+            >
+              + Tạo mục tiêu đầu tiên
+            </a>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {active.map((goal) => {
+              const pct = Math.min(Math.round((goal.currentAmount / goal.targetAmount) * 100), 100);
+              return (
+                <div key={goal.id}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      {(() => { const { Icon, color } = goalCatCfg(goal.goalCategory); return (
+                        <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}20` }}>
+                          <Icon className="w-3.5 h-3.5" style={{ color }} />
+                        </div>
+                      );})()} 
+                      <div>
+                        <p className="text-xs font-semibold text-slate-200">{goal.title}</p>
+                        <p className="text-[10px] text-slate-500">
+                          {formatCompact(goal.currentAmount)}đ / {formatCompact(goal.targetAmount)}đ
+                        </p>
+                      </div>
+                    </div>
+                    <span className={cn(
+                      'text-xs font-bold',
+                      goal.status === 'active' ? 'text-success-400' : 'text-warning-400',
+                    )}>{pct}%</span>
+                  </div>
+                  <div className="progress-track h-1.5">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${pct}%`, backgroundColor: goal.color }}
+                    />
                   </div>
                 </div>
-                <span className={cn(
-                  'text-xs font-bold',
-                  goal.status === 'active' ? 'text-success-400' : 'text-warning-400',
-                )}>{pct}%</span>
-              </div>
-              <div className="progress-track h-1.5">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${pct}%`, backgroundColor: goal.color }}
-                />
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        )}
       </div>
 
-      {/* Gamification badge */}
-      <div className="mt-4 p-3 bg-gradient-brand/10 border border-brand-500/20 rounded-xl flex items-center gap-2">
-        <Trophy className="w-4 h-4 text-warning-400" />
-        <p className="text-[11px] text-slate-300">
-          <span className="font-semibold text-warning-400">1 mục tiêu</span> đã hoàn thành tháng 6! 🎉
-        </p>
-      </div>
+      {completedCount > 0 && (
+        <div className="mt-4 p-3 bg-gradient-brand/10 border border-brand-500/20 rounded-xl flex items-center gap-2">
+          <Trophy className="w-4 h-4 text-warning-400" />
+          <p className="text-[11px] text-slate-300">
+            <span className="font-semibold text-warning-400">{completedCount} mục tiêu</span> đã hoàn thành! 🎉
+          </p>
+        </div>
+      )}
     </div>
   );
 }

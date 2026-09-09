@@ -9,15 +9,14 @@ import type {
   Transaction, Budget, Category, Alert,
   AIInsight, FinancialGoal, GoalContribution, UserProfile,
   DashboardSummary, HealthScore, SpendingHabit, BudgetWithCategory,
+  Reminder,
 } from '../types/finance';
-import {
-  mockCategories, mockBudgets, mockAlerts,
-  mockAIInsights, mockGoals, mockHealthScore, mockSpendingHabits,
-} from '../data/mockData';
+import { mockCategories, mockHealthScore } from '../data/mockData';
 import {
   transactionsApi, budgetsApi, categoriesApi,
   goalsApi, alertsApi, insightsApi,
   healthScoresApi, spendingHabitsApi, usersApi,
+  remindersApi,
 } from '../services/apiService';
 
 // ── Helpers ───────────────────────────────────────────────────────
@@ -52,6 +51,7 @@ interface FinanceState {
   alerts: Alert[];
   insights: AIInsight[];
   goals: FinancialGoal[];
+  reminders: Reminder[];
   healthScore: HealthScore;
   spendingHabits: SpendingHabit[];
   summary: DashboardSummary;
@@ -100,6 +100,13 @@ interface FinanceState {
   addContribution: (goalId: string, contrib: Omit<GoalContribution, 'id' | 'createdAt'>) => Promise<void>;
   updateContribution: (goalId: string, contribId: string, updates: Partial<GoalContribution>) => Promise<void>;
   deleteContribution: (goalId: string, contribId: string) => Promise<void>;
+
+  // Reminder Actions
+  addReminder: (reminder: Omit<Reminder, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
+  updateReminder: (id: string, updates: Partial<Reminder>) => Promise<void>;
+  deleteReminder: (id: string) => Promise<void>;
+  confirmRecurringReminder: (id: string) => Promise<void>;
+  markReminderPaid: (id: string, createTransaction?: boolean) => Promise<void>;
 
   // User Actions
   updateUser: (updates: Partial<UserProfile>) => void;
@@ -154,6 +161,7 @@ export const useFinanceStore = create<FinanceStore>()(
       alerts: [],
       insights: [],
       goals: [],
+      reminders: [],
       healthScore: DEFAULT_HEALTH,
       spendingHabits: [],
       summary: EMPTY_SUMMARY,
@@ -196,60 +204,37 @@ export const useFinanceStore = create<FinanceStore>()(
 
           const existingUsers = await usersApi.getByUserId(clerkUser.id);
           if (existingUsers.length === 0) {
-            // ─── New user: seed default data ──────────────────
+            // ─── New user: seed default categories ONLY (clean account) ───
             await usersApi.create({ ...userProfile, userId: clerkUser.id });
 
-            const catMap: Record<string, string> = {};
+            const seedCats: Category[] = [];
             for (const cat of mockCategories) {
               const created = await categoriesApi.create({ ...cat, userId: clerkUser.id });
-              catMap[cat.id] = created.id;
+              seedCats.push(created);
             }
 
-            for (const tx of get().transactions.length > 0 ? [] : []) {
-              // transactions already empty for new user
-              void tx;
-            }
-
-            const seedCats = await categoriesApi.getByUser(clerkUser.id);
-
-            // Seed budgets with remapped category IDs
-            for (const bud of mockBudgets) {
-              const mappedCatId = catMap[bud.categoryId] ?? bud.categoryId;
-              await budgetsApi.create({ ...bud, categoryId: mappedCatId, userId: clerkUser.id });
-            }
-
-            for (const goal of mockGoals) {
-              await goalsApi.create({ ...goal, userId: clerkUser.id });
-            }
-
-            for (const alert of mockAlerts) {
-              await alertsApi.create({ ...alert, userId: clerkUser.id });
-            }
-
-            for (const insight of mockAIInsights) {
-              await insightsApi.create({ ...insight, userId: clerkUser.id });
-            }
-
-            await healthScoresApi.create({ ...mockHealthScore, userId: clerkUser.id });
-
-            for (const habit of mockSpendingHabits) {
-              const categoryId = catMap[habit.categoryId] ?? habit.categoryId;
-              await spendingHabitsApi.create({ ...habit, categoryId, userId: clerkUser.id });
-            }
-
-            // Re-fetch seeded categories for store
-            set({ categories: seedCats });
+            set({
+              categories: seedCats,
+              transactions: [],
+              budgets: [],
+              goals: [],
+              alerts: [],
+              insights: [],
+              spendingHabits: [],
+              reminders: [],
+            });
           } else {
-            // ─── Returning user: load from server ─────────────
-            const [cats, txs, buds, gls, alts, ins, hss, habits] = await Promise.all([
+            // ─── Returning user: load strictly from server DB ─────────────
+            const [cats, txs, buds, gls, alts, ins, hss, habits, rems] = await Promise.all([
               categoriesApi.getByUser(clerkUser.id),
               transactionsApi.getByUser(clerkUser.id),
               budgetsApi.getByUser(clerkUser.id),
               goalsApi.getByUser(clerkUser.id),
               alertsApi.getByUser(clerkUser.id),
               insightsApi.getByUser(clerkUser.id),
-              healthScoresApi.getByUser(clerkUser.id),
-              spendingHabitsApi.getByUser(clerkUser.id),
+              healthScoresApi.getByUser(clerkUser.id).catch(() => []),
+              spendingHabitsApi.getByUser(clerkUser.id).catch(() => []),
+              remindersApi.getByUser(clerkUser.id).catch(() => []),
             ]);
             set({
               categories:    cats,
@@ -260,6 +245,7 @@ export const useFinanceStore = create<FinanceStore>()(
               insights:      ins,
               healthScore:   hss[0] ?? DEFAULT_HEALTH,
               spendingHabits: habits,
+              reminders:     rems,
             });
           }
 
@@ -531,6 +517,102 @@ export const useFinanceStore = create<FinanceStore>()(
         }
       },
 
+      // ── Reminder Actions ──────────────────────────────────────
+      addReminder: async (reminder) => {
+        const { currentUserId } = get();
+        const optimistic: Reminder = {
+          ...reminder,
+          id: generateId('rem'),
+          createdAt: now(),
+          updatedAt: now(),
+        };
+        set((s) => ({ reminders: [optimistic, ...s.reminders] }));
+        try {
+          const created = await remindersApi.create({
+            ...optimistic,
+            userId: currentUserId ?? 'guest',
+          });
+          set((s) => ({
+            reminders: s.reminders.map((r) => (r.id === optimistic.id ? created : r)),
+          }));
+        } catch (err) {
+          console.error('[addReminder] API error:', err);
+        }
+      },
+
+      updateReminder: async (id, updates) => {
+        const prev = get().reminders.find((r) => r.id === id);
+        set((s) => ({
+          reminders: s.reminders.map((r) =>
+            r.id === id ? { ...r, ...updates, updatedAt: now() } : r
+          ),
+        }));
+        try {
+          await remindersApi.update(id, { ...updates, updatedAt: now() });
+        } catch (err) {
+          console.error('[updateReminder] API error:', err);
+          if (prev) set((s) => ({ reminders: s.reminders.map((r) => (r.id === id ? prev : r)) }));
+        }
+      },
+
+      deleteReminder: async (id) => {
+        const prev = get().reminders.find((r) => r.id === id);
+        set((s) => ({ reminders: s.reminders.filter((r) => r.id !== id) }));
+        try {
+          await remindersApi.remove(id);
+        } catch (err) {
+          console.error('[deleteReminder] API error:', err);
+          if (prev) set((s) => ({ reminders: [...s.reminders, prev] }));
+        }
+      },
+
+      confirmRecurringReminder: async (id) => {
+        const reminder = get().reminders.find((r) => r.id === id);
+        const updates: Partial<Reminder> = {
+          status: 'confirmed',
+          categorySection: 'upcoming',
+          type: 'auto_bill',
+        };
+
+        if (reminder) {
+          await get().updateReminder(id, updates);
+        } else {
+          // Check if it's a newly detected dynamic reminder that hasn't been saved yet
+          const newReminder: Omit<Reminder, 'id' | 'createdAt' | 'updatedAt'> = {
+            title: id.startsWith('auto-rec-') ? `Hóa đơn ${id.replace('auto-rec-', '')}` : 'Hóa đơn định kỳ',
+            type: 'auto_bill',
+            categorySection: 'upcoming',
+            amount: 200000,
+            dueDate: new Date(Date.now() + 3 * 24 * 3600 * 1000).toISOString().split('T')[0],
+            status: 'confirmed',
+            frequency: 'monthly',
+            isAutoGenerated: true,
+            alertLevel: 'info',
+          };
+          await get().addReminder(newReminder);
+        }
+      },
+
+      markReminderPaid: async (id, createTx = false) => {
+        const reminder = get().reminders.find((r) => r.id === id);
+        if (reminder) {
+          await get().updateReminder(id, { status: 'paid' });
+          if (createTx && reminder.amount > 0) {
+            await get().addTransaction({
+              type: 'expense',
+              amount: reminder.amount,
+              currency: 'VND',
+              categoryId: reminder.categoryId || 'cat-05',
+              description: `Thanh toán: ${reminder.title}`,
+              date: now(),
+              isRecurring: reminder.frequency === 'monthly',
+              recurringInterval: reminder.frequency === 'monthly' ? 'monthly' : undefined,
+              merchantName: reminder.detectedPattern?.merchantName || reminder.title,
+            });
+          }
+        }
+      },
+
       // ── User Actions ──────────────────────────────────────────
       updateUser: (updates) => set((s) => ({ user: { ...s.user, ...updates } })),
     }),
@@ -545,10 +627,44 @@ export const useCategories     = () => useFinanceStore((s) => s.categories);
 export const useAlerts         = () => useFinanceStore((s) => s.alerts);
 export const useInsights       = () => useFinanceStore((s) => s.insights);
 export const useGoals          = () => useFinanceStore((s) => s.goals);
-export const useHealthScore    = () => useFinanceStore((s) => s.healthScore);
+export const useReminders      = () => useFinanceStore((s) => s.reminders);
 export const useSpendingHabits = () => useFinanceStore((s) => s.spendingHabits);
 export const useServerOnline   = () => useFinanceStore((s) => s.serverOnline);
 export const useIsLoading      = () => useFinanceStore((s) => s.isLoading);
+
+export const useHealthScore = (): HealthScore => {
+  const transactions = useFinanceStore((s) => s.transactions);
+  const budgets = useFinanceStore((s) => s.budgets);
+
+  return useMemo(() => {
+    const inc = transactions.filter((t) => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+    const exp = transactions.filter((t) => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+    const savings = Math.max(0, inc - exp);
+    const savingsRate = inc > 0 ? Math.round((savings / inc) * 100) : 0;
+
+    const budgetAdherence = budgets.length > 0
+      ? Math.round((budgets.filter((b) => b.spent <= b.amount).length / budgets.length) * 100)
+      : 100;
+
+    const overall = transactions.length === 0 && budgets.length === 0
+      ? 75
+      : Math.min(100, Math.max(20, Math.round(savingsRate * 0.5 + budgetAdherence * 0.5)));
+
+    return {
+      overall,
+      savingsRate,
+      debtRatio: 0,
+      budgetAdherence,
+      emergencyFundMonths: 3,
+      lastUpdated: new Date().toISOString(),
+      breakdown: [
+        { label: 'Tỷ lệ tiết kiệm', score: Math.min(30, Math.round(savingsRate * 0.3)), maxScore: 30, description: 'Tỷ lệ thu nhập được tiết kiệm' },
+        { label: 'Kỷ luật ngân sách', score: Math.round(budgetAdherence * 0.4), maxScore: 40, description: 'Đạt đúng hạn mức ngân sách' },
+        { label: 'Quỹ khẩn cấp', score: 25, maxScore: 30, description: 'Dự phòng tài chính' },
+      ],
+    };
+  }, [transactions, budgets]);
+};
 
 export const useUnreadAlertsCount = () =>
   useFinanceStore((s) => s.alerts.filter((a) => !a.isRead && !a.isDismissed).length);

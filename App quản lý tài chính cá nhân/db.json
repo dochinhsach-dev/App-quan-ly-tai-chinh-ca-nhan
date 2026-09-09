@@ -1,18 +1,6 @@
 {
   "users": [
     {
-      "id": "user-001",
-      "userId": "user-001",
-      "name": "Nguyễn Minh Anh",
-      "email": "minhanh@example.com",
-      "currency": "VND",
-      "monthlyIncome": 25000000,
-      "timezone": "Asia/Ho_Chi_Minh",
-      "notificationsEnabled": true,
-      "aiInsightsEnabled": true,
-      "createdAt": "2024-01-15T00:00:00Z"
-    },
-    {
       "id": "4mDNDpLp5-Q",
       "name": "Sách Đỗ Chính",
       "email": "dochinhsach@gmail.com",
@@ -24,87 +12,22 @@
       "aiInsightsEnabled": true,
       "createdAt": "2026-07-26T04:48:52.064Z",
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    },
+    {
+      "id": "5GSwR274gP0",
+      "name": "Đỗ Chính Sách",
+      "email": "conlada123@gmail.com",
+      "avatarUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zSXREc2lEbkVTaU1NOTlxWGJpaVE0ZzE1dksifQ",
+      "currency": "VND",
+      "monthlyIncome": 25000000,
+      "timezone": "Asia/Ho_Chi_Minh",
+      "notificationsEnabled": true,
+      "aiInsightsEnabled": true,
+      "createdAt": "2026-09-05T02:26:18.825Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     }
   ],
   "categories": [
-    {
-      "id": "cat-01",
-      "userId": "user-001",
-      "name": "Ăn uống",
-      "icon": "UtensilsCrossed",
-      "color": "#f87171",
-      "budget": 4000000
-    },
-    {
-      "id": "cat-02",
-      "userId": "user-001",
-      "name": "Di chuyển",
-      "icon": "Car",
-      "color": "#fb923c",
-      "budget": 1500000
-    },
-    {
-      "id": "cat-03",
-      "userId": "user-001",
-      "name": "Giải trí",
-      "icon": "Gamepad2",
-      "color": "#a78bfa",
-      "budget": 2000000
-    },
-    {
-      "id": "cat-04",
-      "userId": "user-001",
-      "name": "Mua sắm",
-      "icon": "ShoppingBag",
-      "color": "#f472b6",
-      "budget": 3000000
-    },
-    {
-      "id": "cat-05",
-      "userId": "user-001",
-      "name": "Hóa đơn",
-      "icon": "Receipt",
-      "color": "#34d399",
-      "budget": 2500000
-    },
-    {
-      "id": "cat-06",
-      "userId": "user-001",
-      "name": "Sức khỏe",
-      "icon": "HeartPulse",
-      "color": "#22d3ee",
-      "budget": 1000000
-    },
-    {
-      "id": "cat-07",
-      "userId": "user-001",
-      "name": "Giáo dục",
-      "icon": "BookOpen",
-      "color": "#818cf8",
-      "budget": 1500000
-    },
-    {
-      "id": "cat-08",
-      "userId": "user-001",
-      "name": "Đầu tư",
-      "icon": "TrendingUp",
-      "color": "#4ade80",
-      "budget": 5000000
-    },
-    {
-      "id": "cat-09",
-      "userId": "user-001",
-      "name": "Lương",
-      "icon": "Banknote",
-      "color": "#4ade80"
-    },
-    {
-      "id": "cat-10",
-      "userId": "user-001",
-      "name": "Freelance",
-      "icon": "Laptop",
-      "color": "#818cf8"
-    },
     {
       "id": "0BNqAyvXFXE",
       "name": "Ăn uống",
@@ -166,310 +89,89 @@
       "icon": "Laptop",
       "color": "#818cf8",
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
-    }
-  ],
-  "transactions": [
-    {
-      "id": "tx-001",
-      "userId": "user-001",
-      "type": "income",
-      "amount": 25000000,
-      "currency": "VND",
-      "categoryId": "cat-09",
-      "description": "Lương tháng 7/2025",
-      "date": "2025-07-01T08:00:00Z",
-      "isRecurring": true,
-      "recurringInterval": "monthly",
-      "merchantName": "Công ty ABC",
-      "createdAt": "2025-07-01T08:00:00Z",
-      "updatedAt": "2025-07-01T08:00:00Z"
     },
     {
-      "id": "tx-002",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 850000,
-      "currency": "VND",
-      "categoryId": "cat-01",
-      "description": "Nhà hàng Okura",
-      "note": "Sinh nhật bạn bè",
-      "date": "2025-07-10T19:30:00Z",
-      "isRecurring": false,
-      "merchantName": "Okura Restaurant",
-      "tags": [
-        "social"
-      ],
-      "createdAt": "2025-07-10T19:30:00Z",
-      "updatedAt": "2025-07-10T19:30:00Z"
-    },
-    {
-      "id": "tx-003",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 320000,
-      "currency": "VND",
-      "categoryId": "cat-02",
-      "description": "Grab xe tháng",
-      "date": "2025-07-09T07:15:00Z",
-      "isRecurring": false,
-      "merchantName": "Grab",
-      "createdAt": "2025-07-09T07:15:00Z",
-      "updatedAt": "2025-07-09T07:15:00Z"
-    },
-    {
-      "id": "tx-004",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 1200000,
-      "currency": "VND",
-      "categoryId": "cat-04",
-      "description": "Shopee – Quần áo",
-      "date": "2025-07-08T14:00:00Z",
-      "isRecurring": false,
-      "merchantName": "Shopee",
-      "createdAt": "2025-07-08T14:00:00Z",
-      "updatedAt": "2025-07-08T14:00:00Z"
-    },
-    {
-      "id": "tx-005",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 500000,
-      "currency": "VND",
-      "categoryId": "cat-05",
-      "description": "Hóa đơn điện",
-      "date": "2025-07-07T09:00:00Z",
-      "isRecurring": true,
-      "recurringInterval": "monthly",
-      "merchantName": "EVN",
-      "createdAt": "2025-07-07T09:00:00Z",
-      "updatedAt": "2025-07-07T09:00:00Z"
-    },
-    {
-      "id": "tx-006",
-      "userId": "user-001",
-      "type": "income",
-      "amount": 3500000,
-      "currency": "VND",
-      "categoryId": "cat-10",
-      "description": "Dự án freelance – Landing page",
-      "date": "2025-07-06T16:00:00Z",
-      "isRecurring": false,
-      "createdAt": "2025-07-06T16:00:00Z",
-      "updatedAt": "2025-07-06T16:00:00Z"
-    },
-    {
-      "id": "tx-007",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 750000,
-      "currency": "VND",
-      "categoryId": "cat-03",
-      "description": "Netflix + Spotify",
-      "date": "2025-07-05T00:00:00Z",
-      "isRecurring": true,
-      "recurringInterval": "monthly",
-      "merchantName": "Netflix",
-      "createdAt": "2025-07-05T00:00:00Z",
-      "updatedAt": "2025-07-05T00:00:00Z"
-    },
-    {
-      "id": "tx-008",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 2000000,
-      "currency": "VND",
-      "categoryId": "cat-08",
-      "description": "Mua ETF DCVFM",
-      "date": "2025-07-04T10:00:00Z",
-      "isRecurring": true,
-      "recurringInterval": "monthly",
-      "merchantName": "Dragon Capital",
-      "createdAt": "2025-07-04T10:00:00Z",
-      "updatedAt": "2025-07-04T10:00:00Z"
-    },
-    {
-      "id": "tx-009",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 250000,
-      "currency": "VND",
-      "categoryId": "cat-06",
-      "description": "Khám sức khỏe định kỳ",
-      "date": "2025-07-03T08:30:00Z",
-      "isRecurring": false,
-      "merchantName": "Phòng khám Medic",
-      "createdAt": "2025-07-03T08:30:00Z",
-      "updatedAt": "2025-07-03T08:30:00Z"
-    },
-    {
-      "id": "tx-010",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 500000,
-      "currency": "VND",
-      "categoryId": "cat-07",
-      "description": "Khóa học React nâng cao",
-      "date": "2025-07-02T20:00:00Z",
-      "isRecurring": false,
-      "merchantName": "Udemy",
-      "createdAt": "2025-07-02T20:00:00Z",
-      "updatedAt": "2025-07-02T20:00:00Z"
-    },
-    {
-      "id": "tx-011",
-      "userId": "user-001",
-      "type": "income",
-      "amount": 25000000,
-      "currency": "VND",
-      "categoryId": "cat-09",
-      "description": "Lương tháng 6/2025",
-      "date": "2025-06-01T08:00:00Z",
-      "isRecurring": true,
-      "recurringInterval": "monthly",
-      "merchantName": "Công ty ABC",
-      "createdAt": "2025-06-01T08:00:00Z",
-      "updatedAt": "2025-06-01T08:00:00Z"
-    },
-    {
-      "id": "tx-012",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 3200000,
-      "currency": "VND",
-      "categoryId": "cat-01",
-      "description": "Chi phí ăn uống T6",
-      "date": "2025-06-15T12:00:00Z",
-      "isRecurring": false,
-      "createdAt": "2025-06-15T12:00:00Z",
-      "updatedAt": "2025-06-15T12:00:00Z"
-    },
-    {
-      "id": "tx-013",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 2800000,
-      "currency": "VND",
-      "categoryId": "cat-04",
-      "description": "Mua sắm T6",
-      "date": "2025-06-20T14:00:00Z",
-      "isRecurring": false,
-      "merchantName": "Lazada",
-      "createdAt": "2025-06-20T14:00:00Z",
-      "updatedAt": "2025-06-20T14:00:00Z"
-    },
-    {
-      "id": "tx-014",
-      "userId": "user-001",
-      "type": "expense",
-      "amount": 750000,
-      "currency": "VND",
-      "categoryId": "cat-03",
-      "description": "Giải trí T6",
-      "date": "2025-06-10T20:00:00Z",
-      "isRecurring": false,
-      "createdAt": "2025-06-10T20:00:00Z",
-      "updatedAt": "2025-06-10T20:00:00Z"
-    },
-    {
-      "id": "tx-015",
-      "userId": "user-001",
-      "type": "income",
-      "amount": 1300000,
-      "currency": "VND",
-      "categoryId": "cat-10",
-      "description": "Freelance T6",
-      "date": "2025-06-25T10:00:00Z",
-      "isRecurring": false,
-      "createdAt": "2025-06-25T10:00:00Z",
-      "updatedAt": "2025-06-25T10:00:00Z"
-    }
-  ],
-  "budgets": [
-    {
-      "id": "bud-01",
-      "userId": "user-001",
+      "id": "G2v-b7C-Uk8",
       "name": "Ăn uống",
-      "categoryId": "cat-01",
-      "amount": 4000000,
-      "spent": 3200000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 80,
-      "currency": "VND",
-      "isRecurring": true
+      "icon": "UtensilsCrossed",
+      "color": "#f87171",
+      "budget": 4000000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     },
     {
-      "id": "bud-02",
-      "userId": "user-001",
-      "name": "Đi lại",
-      "categoryId": "cat-02",
-      "amount": 1500000,
-      "spent": 650000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 80,
-      "currency": "VND",
-      "isRecurring": true
-    },
-    {
-      "id": "bud-03",
-      "userId": "user-001",
-      "name": "Mua sắm",
-      "categoryId": "cat-03",
-      "amount": 2000000,
-      "spent": 1100000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 80,
-      "currency": "VND",
-      "isRecurring": false
-    },
-    {
-      "id": "bud-04",
-      "userId": "user-001",
+      "id": "39IAKM1lZVU",
       "name": "Giải trí",
-      "categoryId": "cat-04",
-      "amount": 3000000,
-      "spent": 3400000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 80,
-      "currency": "VND",
-      "isRecurring": false
+      "icon": "Gamepad2",
+      "color": "#a78bfa",
+      "budget": 2000000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     },
     {
-      "id": "bud-05",
-      "userId": "user-001",
-      "name": "Y tế & Sức khoẻ",
-      "categoryId": "cat-05",
-      "amount": 2500000,
-      "spent": 800000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 80,
-      "currency": "VND",
-      "isRecurring": false
+      "id": "tdKDgCkQ-_M",
+      "name": "Mua sắm",
+      "icon": "ShoppingBag",
+      "color": "#f472b6",
+      "budget": 3000000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     },
     {
-      "id": "bud-06",
-      "userId": "user-001",
-      "name": "Phát triển bản thân",
-      "categoryId": "cat-08",
-      "amount": 5000000,
-      "spent": 2000000,
-      "period": "monthly",
-      "startDate": "2026-07-01",
-      "endDate": "2026-07-31",
-      "alertThreshold": 70,
-      "currency": "VND",
-      "isRecurring": false
+      "id": "BbUbhpYENPk",
+      "name": "Hóa đơn",
+      "icon": "Receipt",
+      "color": "#34d399",
+      "budget": 2500000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     },
+    {
+      "id": "wFFkz8v6bhM",
+      "name": "Giáo dục",
+      "icon": "BookOpen",
+      "color": "#818cf8",
+      "budget": 1500000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "Pxd3XDe8vsA",
+      "name": "Đầu tư",
+      "icon": "TrendingUp",
+      "color": "#4ade80",
+      "budget": 5000000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "aqNLpaBwyY8",
+      "name": "Lương",
+      "icon": "Banknote",
+      "color": "#4ade80",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "GuX9hMSAoxg",
+      "name": "Di chuyển",
+      "icon": "Car",
+      "color": "#fb923c",
+      "budget": 1500000,
+      "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    },
+    {
+      "id": "FJV7oaD1tc4",
+      "name": "Di chuyển",
+      "icon": "Car",
+      "color": "#fb923c",
+      "budget": 1500000,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "9FIiCcQqIT0",
+      "name": "Mua sắm",
+      "icon": "ShoppingBag",
+      "color": "#f472b6",
+      "budget": 3000000,
+      "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    }
+  ],
+  "transactions": [],
+  "budgets": [
     {
       "id": "GetaKs2d65A",
       "name": "Ăn uống",
@@ -486,7 +188,7 @@
     },
     {
       "id": "ialcSdbiHGs",
-      "name": "Đi lại",
+      "name": "Di chuyển",
       "categoryId": "GuX9hMSAoxg",
       "amount": 1500000,
       "spent": 650000,
@@ -500,7 +202,7 @@
     },
     {
       "id": "n5nDZATZ0tI",
-      "name": "Mua sắm",
+      "name": "Giải trí",
       "categoryId": "fujiSqvUrno",
       "amount": 2000000,
       "spent": 1100000,
@@ -514,7 +216,7 @@
     },
     {
       "id": "P7AsXYlFnPA",
-      "name": "Giải trí",
+      "name": "Hóa đơn",
       "categoryId": "PLjUB_v1YKw",
       "amount": 2500000,
       "spent": 800000,
@@ -528,7 +230,7 @@
     },
     {
       "id": "0lyQ0y8H5pI",
-      "name": "Phát triển bản thân",
+      "name": "Đầu tư",
       "categoryId": "SA0NRcAH13k",
       "amount": 5000000,
       "spent": 2000000,
@@ -539,125 +241,209 @@
       "currency": "VND",
       "isRecurring": false,
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    },
+    {
+      "id": "eiyrFSW278k",
+      "categoryId": "G2v-b7C-Uk8",
+      "amount": 4000000,
+      "spent": 3200000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 80,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Ăn uống"
+    },
+    {
+      "id": "43wf6UZYQYE",
+      "categoryId": "FJV7oaD1tc4",
+      "amount": 1500000,
+      "spent": 650000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 80,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Di chuyển"
+    },
+    {
+      "id": "SdIO_g9Cdng",
+      "categoryId": "39IAKM1lZVU",
+      "amount": 2000000,
+      "spent": 1100000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 80,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Giải trí"
+    },
+    {
+      "id": "dzQe9SqcblU",
+      "categoryId": "tdKDgCkQ-_M",
+      "amount": 3000000,
+      "spent": 3400000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 80,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Mua sắm"
+    },
+    {
+      "id": "CA3x5IgJMnU",
+      "categoryId": "BbUbhpYENPk",
+      "amount": 2500000,
+      "spent": 800000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 80,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Hóa đơn"
+    },
+    {
+      "id": "DWm03LqDyCA",
+      "categoryId": "Pxd3XDe8vsA",
+      "amount": 5000000,
+      "spent": 2000000,
+      "period": "monthly",
+      "startDate": "2025-07-01",
+      "endDate": "2025-07-31",
+      "alertThreshold": 70,
+      "currency": "VND",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "name": "Đầu tư"
     }
   ],
   "goals": [
     {
-      "id": "goal-001",
-      "userId": "user-001",
-      "title": "Mua MacBook Pro",
-      "description": "Mua laptop mới để làm việc và học tập",
-      "targetAmount": 30000000,
-      "currentAmount": 10000000,
-      "initialAmount": 10000000,
+      "id": "bHGtgtSZN1U",
+      "title": "Quỹ khẩn cấp 6 tháng",
+      "iconEmoji": "ðŸ›¡ï¸",
+      "color": "#4ade80",
+      "description": "Xây dựng quỹ dự phòng đủ cho 6 tháng chi tiêu",
+      "targetAmount": 72000000,
+      "currentAmount": 36000000,
+      "initialAmount": 12000000,
       "currency": "VND",
-      "startDate": "2025-01-01",
+      "startDate": "2024-01-15",
       "deadline": "2026-12-31",
       "status": "active",
-      "goalCategory": "tech",
+      "goalCategory": "emergency",
       "priority": "high",
-      "iconEmoji": "💻",
-      "color": "#6366f1",
-      "contributions": [],
-      "milestones": [
+      "contributions": [
         {
-          "id": "ms-001",
-          "title": "Tiết kiệm 10 triệu",
-          "targetAmount": 10000000,
-          "isAchieved": true,
-          "achievedAt": "2025-06-01T00:00:00Z"
+          "id": "c-01-1",
+          "amount": 5000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 1",
+          "date": "2024-02-01",
+          "createdAt": "2024-02-01T08:00:00Z"
         },
         {
-          "id": "ms-002",
-          "title": "Tiết kiệm 20 triệu",
-          "targetAmount": 20000000,
-          "isAchieved": false
+          "id": "c-01-2",
+          "amount": 5000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 2",
+          "date": "2024-03-01",
+          "createdAt": "2024-03-01T08:00:00Z"
+        },
+        {
+          "id": "c-01-3",
+          "amount": 4000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 3",
+          "date": "2024-04-01",
+          "createdAt": "2024-04-01T08:00:00Z"
+        },
+        {
+          "id": "c-01-4",
+          "amount": 5000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 4",
+          "date": "2024-05-01",
+          "createdAt": "2024-05-01T08:00:00Z"
+        },
+        {
+          "id": "c-01-5",
+          "amount": 5000000,
+          "note": "ThÆ°á»Ÿng cuá»‘i nÄƒm",
+          "date": "2025-01-05",
+          "createdAt": "2025-01-05T08:00:00Z"
         }
       ],
       "reminderEnabled": true,
       "reminderFrequency": "monthly",
-      "createdAt": "2025-01-01T00:00:00Z",
-      "updatedAt": "2025-01-01T00:00:00Z"
+      "milestones": [
+        {
+          "id": "m-01",
+          "title": "1 thÃ¡ng chi tiÃªu",
+          "targetAmount": 12000000,
+          "achievedAt": "2024-06-01",
+          "isAchieved": true
+        },
+        {
+          "id": "m-02",
+          "title": "3 thÃ¡ng chi tiÃªu",
+          "targetAmount": 36000000,
+          "achievedAt": "2025-03-01",
+          "isAchieved": true
+        },
+        {
+          "id": "m-03",
+          "title": "6 thÃ¡ng chi tiÃªu",
+          "targetAmount": 72000000,
+          "isAchieved": false
+        }
+      ],
+      "createdAt": "2024-01-15T00:00:00Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     },
     {
-      "id": "goal-002",
-      "userId": "user-001",
-      "title": "Du lịch Đà Nẵng",
-      "description": "Chuyến du lịch gia đình hè 2026",
-      "targetAmount": 15000000,
-      "currentAmount": 5000000,
+      "id": "v-N4FD3NaJ4",
+      "title": "Mua xe máy mới",
+      "iconEmoji": "ðŸ›µ",
+      "color": "#f472b6",
+      "description": "Tích lũy mua Honda Air Blade 2025 phiên bản cao cấp",
+      "targetAmount": 55000000,
+      "currentAmount": 10000000,
       "initialAmount": 5000000,
       "currency": "VND",
       "startDate": "2025-06-01",
-      "deadline": "2026-07-01",
+      "deadline": "2026-06-30",
       "status": "active",
-      "goalCategory": "travel",
-      "priority": "medium",
-      "iconEmoji": "✈️",
-      "color": "#22d3ee",
-      "contributions": [],
-      "milestones": [],
+      "goalCategory": "vehicle",
+      "priority": "low",
+      "contributions": [
+        {
+          "id": "c-03-1",
+          "amount": 3000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 6",
+          "date": "2025-07-01",
+          "createdAt": "2025-07-01T08:00:00Z"
+        },
+        {
+          "id": "c-03-2",
+          "amount": 2000000,
+          "note": "Tiáº¿t kiá»‡m thÃ¡ng 7",
+          "date": "2025-08-01",
+          "createdAt": "2025-08-01T08:00:00Z"
+        }
+      ],
       "reminderEnabled": false,
+      "milestones": [],
       "createdAt": "2025-06-01T00:00:00Z",
-      "updatedAt": "2025-06-01T00:00:00Z"
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     }
   ],
   "alerts": [
     {
-      "id": "alt-01",
-      "userId": "user-001",
-      "severity": "danger",
-      "title": "Vượt ngân sách Mua sắm!",
-      "message": "Bạn đã chi 113% ngân sách mua sắm tháng này (3.4/3.0 triệu). Hãy điều chỉnh.",
-      "categoryId": "cat-04",
-      "budgetId": "bud-04",
-      "isRead": false,
-      "isDismissed": false,
-      "actionLabel": "Xem chi tiết",
-      "actionRoute": "/budgets",
-      "createdAt": "2025-07-08T14:00:00Z"
-    },
-    {
-      "id": "alt-02",
-      "userId": "user-001",
-      "severity": "warning",
-      "title": "Gần đạt giới hạn Ăn uống",
-      "message": "Đã dùng 80% ngân sách ăn uống (3.2/4.0 triệu). Còn 800,000đ cho 21 ngày.",
-      "categoryId": "cat-01",
-      "budgetId": "bud-01",
-      "isRead": false,
-      "isDismissed": false,
-      "actionLabel": "Xem ngân sách",
-      "actionRoute": "/budgets",
-      "createdAt": "2025-07-10T10:00:00Z"
-    },
-    {
-      "id": "alt-03",
-      "userId": "user-001",
-      "severity": "info",
-      "title": "Hóa đơn Internet sắp đến hạn",
-      "message": "Hóa đơn FPT Telecom 350,000đ sẽ tự động thu vào ngày 15/07.",
-      "isRead": true,
-      "isDismissed": false,
-      "actionLabel": "Xem nhắc nhở",
-      "actionRoute": "/reminders",
-      "createdAt": "2025-07-10T08:00:00Z"
-    },
-    {
-      "id": "alt-04",
-      "userId": "user-001",
-      "severity": "success",
-      "title": "Đạt mục tiêu tiết kiệm tháng 6!",
-      "message": "Tuyệt vời! Bạn đã tiết kiệm 5.2 triệu trong tháng 6, vượt mục tiêu 4%.",
-      "isRead": true,
-      "isDismissed": false,
-      "createdAt": "2025-07-01T08:00:00Z"
-    },
-    {
       "id": "z0LC7uhlVCY",
       "severity": "danger",
       "title": "Vượt ngân sách Mua sắm!",
-      "message": "Bạn đã chi 113% ngân sách mua sắm tháng này (3.4/3.0 triệu). Hãy điều chỉnh.",
+      "message": "Bạn đã chi 113% ngân sách mua sắm tháng này. Hãy điều chỉnh.",
       "categoryId": "cat-04",
       "budgetId": "bud-04",
       "isRead": true,
@@ -671,7 +457,7 @@
       "id": "0jTWQ3DySwk",
       "severity": "warning",
       "title": "Gần đạt giới hạn Ăn uống",
-      "message": "Đã dùng 80% ngân sách ăn uống (3.2/4.0 triệu). Còn 800,000đ cho 21 ngày.",
+      "message": "Đã dùng 80% ngân sách ăn uống. Còn 800,000đ cho 21 ngày.",
       "categoryId": "cat-01",
       "budgetId": "bud-01",
       "isRead": true,
@@ -690,82 +476,59 @@
       "isDismissed": false,
       "createdAt": "2025-07-01T08:00:00Z",
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    },
+    {
+      "id": "CZljuHP95DI",
+      "severity": "danger",
+      "title": "Vượt ngân sách Mua sắm!",
+      "message": "Bạn đã chi 113% ngân sách mua sắm tháng này. Hãy điều chỉnh.",
+      "categoryId": "cat-04",
+      "budgetId": "bud-04",
+      "isRead": true,
+      "isDismissed": false,
+      "actionLabel": "Xem chi tiết",
+      "actionRoute": "/budgets",
+      "createdAt": "2025-07-08T14:00:00Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "wdG86zlNSc4",
+      "severity": "warning",
+      "title": "Gần đạt giới hạn Ăn uống",
+      "message": "Đã dùng 80% ngân sách ăn uống. Còn 800,000đ cho 21 ngày.",
+      "categoryId": "cat-01",
+      "budgetId": "bud-01",
+      "isRead": false,
+      "isDismissed": false,
+      "actionLabel": "Xem ngân sách",
+      "actionRoute": "/budgets",
+      "createdAt": "2025-07-10T10:00:00Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "P_DW3VTxEKc",
+      "severity": "info",
+      "title": "Hóa đơn Internet sắp đến hạn",
+      "message": "Hóa đơn FPT Telecom 350,000đ sẽ tự động thu vào ngày 15 tháng tới.",
+      "isRead": true,
+      "isDismissed": false,
+      "actionLabel": "Xem nhắc nhở",
+      "actionRoute": "/reminders",
+      "createdAt": "2025-07-10T08:00:00Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "i57_UxEVNLk",
+      "severity": "success",
+      "title": "Đạt mục tiêu tiết kiệm tháng 6!",
+      "message": "Tuyệt vời! Bạn đã tiết kiệm 5.2 triệu trong tháng 6, vượt mục tiêu 4%.",
+      "isRead": true,
+      "isDismissed": false,
+      "createdAt": "2025-07-01T08:00:00Z",
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     }
   ],
   "insights": [
-    {
-      "id": "ins-01",
-      "userId": "user-001",
-      "type": "saving",
-      "title": "Giảm chi phí ăn ngoài tiết kiệm 1.2 triệu/tháng",
-      "summary": "Bạn ăn ngoài trung bình 4.3 lần/tuần, cao hơn 60% so với người dùng tương tự.",
-      "detail": "Phân tích 3 tháng gần nhất cho thấy bạn chi khoảng 280,000đ/bữa ăn ngoài. Nếu nấu ăn ở nhà 2 buổi/tuần, bạn có thể tiết kiệm ~1.2 triệu đồng mỗi tháng.",
-      "potentialSaving": 1200000,
-      "confidenceScore": 0.87,
-      "tags": [
-        "ăn uống",
-        "tiết kiệm",
-        "thói quen"
-      ],
-      "relatedCategoryIds": [
-        "cat-01"
-      ],
-      "actionItems": [
-        "Lên kế hoạch nấu ăn cuối tuần",
-        "Đặt mục tiêu ≤ 3 bữa ngoài/tuần"
-      ],
-      "generatedAt": "2025-07-10T06:00:00Z",
-      "isApplied": false
-    },
-    {
-      "id": "ins-02",
-      "userId": "user-001",
-      "type": "budget",
-      "title": "Tái cơ cấu ngân sách theo quy tắc 50/30/20",
-      "summary": "Cấu trúc chi tiêu hiện tại của bạn chưa tối ưu. Áp dụng 50/30/20 giúp tiết kiệm thêm 2.5 triệu.",
-      "detail": "Hiện tại: Nhu cầu thiết yếu 58% | Muốn 30% | Tiết kiệm 12%. Lý tưởng: Nhu cầu 50% | Muốn 30% | Tiết kiệm 20%.",
-      "potentialSaving": 2500000,
-      "confidenceScore": 0.91,
-      "tags": [
-        "ngân sách",
-        "kế hoạch",
-        "50/30/20"
-      ],
-      "relatedCategoryIds": [
-        "cat-01",
-        "cat-04"
-      ],
-      "actionItems": [
-        "Điều chỉnh ngân sách mua sắm xuống 2.5 triệu",
-        "Tăng quỹ đầu tư lên 5 triệu"
-      ],
-      "generatedAt": "2025-07-10T06:00:00Z",
-      "isApplied": false
-    },
-    {
-      "id": "ins-03",
-      "userId": "user-001",
-      "type": "habit",
-      "title": "Bạn hay mua sắm bốc đồng vào thứ 6–7",
-      "summary": "73% giao dịch mua sắm của bạn xảy ra vào cuối tuần, thường sau 8 giờ tối.",
-      "detail": "Mẫu hành vi cho thấy chi tiêu cuối tuần cao hơn 2.3 lần ngày thường. Thử thiết lập \"ngân sách cuối tuần\".",
-      "potentialSaving": 800000,
-      "confidenceScore": 0.79,
-      "tags": [
-        "thói quen",
-        "mua sắm",
-        "cuối tuần"
-      ],
-      "relatedCategoryIds": [
-        "cat-04",
-        "cat-03"
-      ],
-      "actionItems": [
-        "Bật thông báo khi tiêu > 200k/lần vào cuối tuần"
-      ],
-      "generatedAt": "2025-07-09T06:00:00Z",
-      "isApplied": false
-    },
     {
       "id": "BfDbBGoydKo",
       "type": "saving",
@@ -775,16 +538,16 @@
       "potentialSaving": 1200000,
       "confidenceScore": 0.87,
       "tags": [
-        "ăn uống",
-        "tiết kiệm",
-        "thói quen"
+        "Äƒn uá»‘ng",
+        "tiáº¿t kiá»‡m",
+        "thÃ³i quen"
       ],
       "relatedCategoryIds": [
         "cat-01"
       ],
       "actionItems": [
-        "Lên kế hoạch nấu ăn cuối tuần",
-        "Đặt mục tiêu ≤ 3 bữa ngoài/tuần"
+        "LÃªn káº¿ hoáº¡ch náº¥u Äƒn cuá»‘i tuáº§n",
+        "Äáº·t má»¥c tiÃªu â‰¤ 3 bá»¯a ngoÃ i/tuáº§n"
       ],
       "generatedAt": "2025-07-10T06:00:00Z",
       "isApplied": false,
@@ -799,17 +562,17 @@
       "potentialSaving": 800000,
       "confidenceScore": 0.79,
       "tags": [
-        "thói quen",
-        "mua sắm",
-        "cuối tuần"
+        "thÃ³i quen",
+        "mua sáº¯m",
+        "cuá»‘i tuáº§n"
       ],
       "relatedCategoryIds": [
         "cat-04",
         "cat-03"
       ],
       "actionItems": [
-        "Bật thông báo khi tiêu > 200k/lần vào cuối tuần",
-        "Thiết lập quy tắc 24h trước khi mua sắm > 500k"
+        "Báº­t thÃ´ng bÃ¡o khi tiÃªu > 200k/láº§n vÃ o cuá»‘i tuáº§n",
+        "Thiáº¿t láº­p quy táº¯c 24h trÆ°á»›c khi mua sáº¯m > 500k"
       ],
       "generatedAt": "2025-07-09T06:00:00Z",
       "isApplied": false,
@@ -824,25 +587,120 @@
       "potentialSaving": 0,
       "confidenceScore": 0.95,
       "tags": [
-        "quỹ khẩn cấp",
-        "an toàn tài chính"
+        "quá»¹ kháº©n cáº¥p",
+        "an toÃ n tÃ i chÃ­nh"
       ],
       "relatedCategoryIds": [
         "cat-08"
       ],
       "actionItems": [
-        "Tạo tài khoản tiết kiệm riêng cho quỹ khẩn cấp",
-        "Tự động chuyển 3 triệu vào ngày 1 mỗi tháng"
+        "Táº¡o tÃ i khoáº£n tiáº¿t kiá»‡m riÃªng cho quá»¹ kháº©n cáº¥p",
+        "Tá»± Ä‘á»™ng chuyá»ƒn 3 triá»‡u vÃ o ngÃ y 1 má»—i thÃ¡ng"
       ],
       "generatedAt": "2025-07-08T06:00:00Z",
       "isApplied": true,
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy"
+    },
+    {
+      "id": "2tGRdKzME4c",
+      "type": "saving",
+      "title": "Giảm chi phí ăn ngoài tiết kiệm 1.2 triệu/tháng",
+      "summary": "Bạn ăn ngoài trung bình 4.3 lần/tuần, cao hơn 60% so với người dùng tương tự.",
+      "detail": "Phân tích 3 tháng gần nhất cho thấy bạn chi khoảng 280,000đ/bữa ăn ngoài. Nếu nấu ăn ở nhà 2 buổi/tuần, bạn có thể tiết kiệm ~1.2 triệu đồng mỗi tháng mà không ảnh hưởng đến chất lượng sống.",
+      "potentialSaving": 1200000,
+      "confidenceScore": 0.87,
+      "tags": [
+        "Äƒn uá»‘ng",
+        "tiáº¿t kiá»‡m",
+        "thÃ³i quen"
+      ],
+      "relatedCategoryIds": [
+        "cat-01"
+      ],
+      "actionItems": [
+        "LÃªn káº¿ hoáº¡ch náº¥u Äƒn cuá»‘i tuáº§n",
+        "Äáº·t má»¥c tiÃªu â‰¤ 3 bá»¯a ngoÃ i/tuáº§n"
+      ],
+      "generatedAt": "2025-07-10T06:00:00Z",
+      "isApplied": false,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "UdfGwDRKWdE",
+      "type": "budget",
+      "title": "Tái cơ cấu ngân sách theo quy tắc 50/30/20",
+      "summary": "Cấu trúc chi tiêu hiện tại của bạn chưa tối ưu. Áp dụng 50/30/20 giúp tiết kiệm thêm 2.5 triệu.",
+      "detail": "Hiện tại: Nhu cầu thiết yếu 58% | Muốn 30% | Tiết kiệm 12%. Lý tưởng: Nhu cầu 50% | Muốn 30% | Tiết kiệm 20%. Điều chỉnh nhỏ trong mục mua sắm và ăn uống sẽ cải thiện đáng kể.",
+      "potentialSaving": 2500000,
+      "confidenceScore": 0.91,
+      "tags": [
+        "ngÃ¢n sÃ¡ch",
+        "káº¿ hoáº¡ch",
+        "50/30/20"
+      ],
+      "relatedCategoryIds": [
+        "cat-01",
+        "cat-04"
+      ],
+      "actionItems": [
+        "Äiá»u chá»‰nh ngÃ¢n sÃ¡ch mua sáº¯m xuá»‘ng 2.5 triá»‡u",
+        "TÄƒng quá»¹ Ä‘áº§u tÆ° lÃªn 5 triá»‡u"
+      ],
+      "generatedAt": "2025-07-10T06:00:00Z",
+      "isApplied": false,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "EmgHT5DTBkg",
+      "type": "habit",
+      "title": "Bạn hay mua sắm bốc đồng vào thứ 6–7",
+      "summary": "73% giao dịch mua sắm của bạn xảy ra vào cuối tuần, thường sau 8 giờ tối.",
+      "detail": "Mẫu hành vi cho thấy chi tiêu cuối tuần cao hơn 2.3 lần ngày thường. Thử thiết lập \"ngân sách cuối tuần\" giới hạn 500,000đ cho mỗi thứ 6–7 để kiểm soát chi tiêu bốc đồng.",
+      "potentialSaving": 800000,
+      "confidenceScore": 0.79,
+      "tags": [
+        "thÃ³i quen",
+        "mua sáº¯m",
+        "cuá»‘i tuáº§n"
+      ],
+      "relatedCategoryIds": [
+        "cat-04",
+        "cat-03"
+      ],
+      "actionItems": [
+        "Báº­t thÃ´ng bÃ¡o khi tiÃªu > 200k/láº§n vÃ o cuá»‘i tuáº§n",
+        "Thiáº¿t láº­p quy táº¯c 24h trÆ°á»›c khi mua sáº¯m > 500k"
+      ],
+      "generatedAt": "2025-07-09T06:00:00Z",
+      "isApplied": false,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
+    },
+    {
+      "id": "NNcLb_d6GfA",
+      "type": "goal",
+      "title": "Quỹ khẩn cấp cần thêm 3 tháng",
+      "summary": "Quỹ khẩn cấp của bạn hiện đủ 3 tháng chi tiêu. Mục tiêu lý tưởng là 6 tháng.",
+      "detail": "Với chi phí sống hiện tại ~12 triệu/tháng, bạn cần 72 triệu trong quỹ khẩn cấp. Hiện có ~36 triệu. Nếu tiết kiệm thêm 3 triệu/tháng, bạn sẽ đạt mục tiêu trong 12 tháng.",
+      "potentialSaving": 0,
+      "confidenceScore": 0.95,
+      "tags": [
+        "quá»¹ kháº©n cáº¥p",
+        "an toÃ n tÃ i chÃ­nh"
+      ],
+      "relatedCategoryIds": [
+        "cat-08"
+      ],
+      "actionItems": [
+        "Táº¡o tÃ i khoáº£n tiáº¿t kiá»‡m riÃªng cho quá»¹ kháº©n cáº¥p",
+        "Tá»± Ä‘á»™ng chuyá»ƒn 3 triá»‡u vÃ o ngÃ y 1 má»—i thÃ¡ng"
+      ],
+      "generatedAt": "2025-07-08T06:00:00Z",
+      "isApplied": true,
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4"
     }
   ],
   "healthScores": [
     {
-      "id": "hs-001",
-      "userId": "user-001",
       "overall": 72,
       "savingsRate": 22,
       "debtRatio": 0,
@@ -851,140 +709,83 @@
       "lastUpdated": "2025-07-10T06:00:00Z",
       "breakdown": [
         {
-          "label": "Tỷ lệ tiết kiệm",
+          "label": "Tá»· lá»‡ tiáº¿t kiá»‡m",
           "score": 22,
           "maxScore": 30,
-          "description": "Tốt! Mục tiêu lý tưởng ≥ 20%"
+          "description": "Tá»‘t! Má»¥c tiÃªu lÃ½ tÆ°á»Ÿng â‰¥ 20%"
         },
         {
-          "label": "Kiểm soát ngân sách",
+          "label": "Kiá»ƒm soÃ¡t ngÃ¢n sÃ¡ch",
           "score": 18,
           "maxScore": 30,
-          "description": "Vượt ngân sách 2 danh mục"
+          "description": "VÆ°á»£t ngÃ¢n sÃ¡ch 2 danh má»¥c"
         },
         {
-          "label": "Quỹ khẩn cấp",
+          "label": "Quá»¹ kháº©n cáº¥p",
           "score": 15,
           "maxScore": 20,
-          "description": "3/6 tháng chi tiêu đã có"
+          "description": "3/6 thÃ¡ng chi tiÃªu Ä‘Ã£ cÃ³"
         },
         {
-          "label": "Đầu tư",
+          "label": "Äáº§u tÆ°",
           "score": 12,
           "maxScore": 15,
-          "description": "Đang đầu tư 8% thu nhập"
+          "description": "Äang Ä‘áº§u tÆ° 8% thu nháº­p"
         },
         {
-          "label": "Không có nợ xấu",
+          "label": "KhÃ´ng cÃ³ ná»£ xáº¥u",
           "score": 5,
           "maxScore": 5,
-          "description": "Xuất sắc – Không nợ!"
-        }
-      ]
-    },
-    {
-      "overall": 72,
-      "savingsRate": 22,
-      "debtRatio": 0,
-      "budgetAdherence": 67,
-      "emergencyFundMonths": 3,
-      "lastUpdated": "2025-07-10T06:00:00Z",
-      "breakdown": [
-        {
-          "label": "Tỷ lệ tiết kiệm",
-          "score": 22,
-          "maxScore": 30,
-          "description": "Tốt! Mục tiêu lý tưởng ≥ 20%"
-        },
-        {
-          "label": "Kiểm soát ngân sách",
-          "score": 18,
-          "maxScore": 30,
-          "description": "Vượt ngân sách 2 danh mục"
-        },
-        {
-          "label": "Quỹ khẩn cấp",
-          "score": 15,
-          "maxScore": 20,
-          "description": "3/6 tháng chi tiêu đã có"
-        },
-        {
-          "label": "Đầu tư",
-          "score": 12,
-          "maxScore": 15,
-          "description": "Đang đầu tư 8% thu nhập"
-        },
-        {
-          "label": "Không có nợ xấu",
-          "score": 5,
-          "maxScore": 5,
-          "description": "Xuất sắc – Không nợ!"
+          "description": "Xuáº¥t sáº¯c â€“ KhÃ´ng ná»£!"
         }
       ],
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy",
       "id": "DT_GoEj47WU"
+    },
+    {
+      "overall": 72,
+      "savingsRate": 22,
+      "debtRatio": 0,
+      "budgetAdherence": 67,
+      "emergencyFundMonths": 3,
+      "lastUpdated": "2025-07-10T06:00:00Z",
+      "breakdown": [
+        {
+          "label": "Tá»· lá»‡ tiáº¿t kiá»‡m",
+          "score": 22,
+          "maxScore": 30,
+          "description": "Tá»‘t! Má»¥c tiÃªu lÃ½ tÆ°á»Ÿng â‰¥ 20%"
+        },
+        {
+          "label": "Kiá»ƒm soÃ¡t ngÃ¢n sÃ¡ch",
+          "score": 18,
+          "maxScore": 30,
+          "description": "VÆ°á»£t ngÃ¢n sÃ¡ch 2 danh má»¥c"
+        },
+        {
+          "label": "Quá»¹ kháº©n cáº¥p",
+          "score": 15,
+          "maxScore": 20,
+          "description": "3/6 thÃ¡ng chi tiÃªu Ä‘Ã£ cÃ³"
+        },
+        {
+          "label": "Äáº§u tÆ°",
+          "score": 12,
+          "maxScore": 15,
+          "description": "Äang Ä‘áº§u tÆ° 8% thu nháº­p"
+        },
+        {
+          "label": "KhÃ´ng cÃ³ ná»£ xáº¥u",
+          "score": 5,
+          "maxScore": 5,
+          "description": "Xuáº¥t sáº¯c â€“ KhÃ´ng ná»£!"
+        }
+      ],
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "id": "o1CtHcTfcko"
     }
   ],
   "spendingHabits": [
-    {
-      "id": "sh-01",
-      "userId": "user-001",
-      "categoryId": "cat-01",
-      "averageMonthly": 3600000,
-      "trend": "increasing",
-      "trendPercentage": 12,
-      "peakDayOfWeek": 0,
-      "peakHourOfDay": 12,
-      "topMerchants": [
-        "Okura",
-        "Bún bò Hoa",
-        "KFC"
-      ]
-    },
-    {
-      "id": "sh-02",
-      "userId": "user-001",
-      "categoryId": "cat-04",
-      "averageMonthly": 2800000,
-      "trend": "increasing",
-      "trendPercentage": 25,
-      "peakDayOfWeek": 6,
-      "peakHourOfDay": 20,
-      "topMerchants": [
-        "Shopee",
-        "Lazada",
-        "Zara"
-      ]
-    },
-    {
-      "id": "sh-03",
-      "userId": "user-001",
-      "categoryId": "cat-03",
-      "averageMonthly": 1050000,
-      "trend": "stable",
-      "trendPercentage": 2,
-      "peakDayOfWeek": 5,
-      "peakHourOfDay": 22,
-      "topMerchants": [
-        "Netflix",
-        "Spotify",
-        "Steam"
-      ]
-    },
-    {
-      "id": "sh-04",
-      "userId": "user-001",
-      "categoryId": "cat-02",
-      "averageMonthly": 580000,
-      "trend": "decreasing",
-      "trendPercentage": -8,
-      "peakDayOfWeek": 1,
-      "peakHourOfDay": 8,
-      "topMerchants": [
-        "Grab",
-        "Xăng"
-      ]
-    },
     {
       "categoryId": "9FIiCcQqIT0",
       "averageMonthly": 2800000,
@@ -1024,11 +825,56 @@
       "peakHourOfDay": 8,
       "topMerchants": [
         "Grab",
-        "Xăng"
+        "XÄƒng"
       ],
       "userId": "user_3GbwRN3oBcV1XK4KFP0uzJOFvOy",
       "id": "L8jDu5ylZQ0"
+    },
+    {
+      "categoryId": "G2v-b7C-Uk8",
+      "averageMonthly": 3600000,
+      "trend": "increasing",
+      "trendPercentage": 12,
+      "peakDayOfWeek": 0,
+      "peakHourOfDay": 12,
+      "topMerchants": [
+        "Okura",
+        "BÃºn bÃ² Hoa",
+        "KFC"
+      ],
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "id": "qz-0zRpnjM0"
+    },
+    {
+      "categoryId": "39IAKM1lZVU",
+      "averageMonthly": 1050000,
+      "trend": "stable",
+      "trendPercentage": 2,
+      "peakDayOfWeek": 5,
+      "peakHourOfDay": 22,
+      "topMerchants": [
+        "Netflix",
+        "Spotify",
+        "Steam"
+      ],
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "id": "OJQfWFekjnY"
+    },
+    {
+      "categoryId": "FJV7oaD1tc4",
+      "averageMonthly": 580000,
+      "trend": "decreasing",
+      "trendPercentage": -8,
+      "peakDayOfWeek": 1,
+      "peakHourOfDay": 8,
+      "topMerchants": [
+        "Grab",
+        "XÄƒng"
+      ],
+      "userId": "user_3ItDsgx22uXrxVn7nkUdKvW3LV4",
+      "id": "ipZIoyUlVQE"
     }
   ],
+  "reminders": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

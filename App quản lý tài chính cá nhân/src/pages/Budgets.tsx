@@ -9,7 +9,10 @@ import {
   CheckCircle2, PieChart as PieIcon, BarChart2,
   BookOpen, Lightbulb, ShieldAlert, Copy, ArrowUpDown,
   Flame, Clock, Zap, DollarSign, Activity,
+  UtensilsCrossed, Car, Gamepad2, ShoppingBag, Receipt,
+  HeartPulse, Laptop, Home, Coffee, Plane, Gift, Music, Banknote,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis,
   Tooltip, ResponsiveContainer, CartesianGrid, Legend,
@@ -18,16 +21,16 @@ import { cn, formatVND, formatCompact } from '../utils/helpers';
 import { useTransactions, useCategories, useFinanceStore } from '../stores/useFinanceStore';
 import type { Budget, Category, Transaction } from '../types/finance';
 
-// ── Category Icon Map ─────────────────────────────────────────────
-const CATEGORY_EMOJI: Record<string, string> = {
-  'UtensilsCrossed': '🍜', 'Car': '🚗', 'Gamepad2': '🎮',
-  'ShoppingBag': '🛍️', 'Receipt': '🧾', 'HeartPulse': '❤️‍🩹',
-  'BookOpen': '📚', 'TrendingUp': '📈', 'Banknote': '💵',
-  'Laptop': '💻', 'Home': '🏠', 'Coffee': '☕',
-  'Plane': '✈️', 'Gift': '🎁', 'Music': '🎵',
+// ── Category Icon Map (Lucide) ────────────────────────────────────
+const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
+  UtensilsCrossed, Car, Gamepad2, ShoppingBag, Receipt,
+  HeartPulse, BookOpen, TrendingUp, Banknote, Laptop,
+  Home, Coffee, Plane, Gift, Music,
+  Wallet, ShieldAlert, DollarSign,
 };
-function getCatEmoji(iconName?: string): string {
-  return iconName ? (CATEGORY_EMOJI[iconName] ?? '💰') : '💰';
+function CatIcon({ iconName, color, size = 18 }: { iconName?: string; color?: string; size?: number }) {
+  const Icon = (iconName ? CATEGORY_ICON_MAP[iconName] : null) ?? Wallet;
+  return <Icon className="flex-shrink-0" style={{ width: size, height: size, color: color ?? '#94a3b8' }} />;
 }
 
 // ── Constants ─────────────────────────────────────────────────────
@@ -221,7 +224,7 @@ function QuickAddModal({ budget, onClose }: { budget: BudgetEx; onClose: () => v
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl flex items-center justify-center"
               style={{ backgroundColor: `${catColor}20`, border: `1px solid ${catColor}35` }}>
-              <span className="text-base">{getCatEmoji(budget.category?.icon)}</span>
+              <CatIcon iconName={budget.category?.icon} color={catColor} size={18} />
             </div>
             <div>
               <p className="text-sm font-semibold text-slate-100">Thêm nhanh giao dịch</p>
@@ -363,7 +366,7 @@ function BudgetModal({ mode, init, budgetId, onClose }: {
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
               {selectedCat
-                ? <span className="text-base">{getCatEmoji(selectedCat.icon)}</span>
+                ? <CatIcon iconName={selectedCat.icon} color='#818cf8' size={16} />
                 : (mode === 'add' ? <Plus className="w-4 h-4 text-brand-400" /> : <Edit2 className="w-4 h-4 text-brand-400" />)
               }
             </div>
@@ -385,7 +388,7 @@ function BudgetModal({ mode, init, budgetId, onClose }: {
                 className={cn(iCls, 'appearance-none pr-8', errors.categoryId && 'border-danger-500/60')}>
                 <option value="">Chọn danh mục</option>
                 {expenseCats.map(c => (
-                  <option key={c.id} value={c.id}>{getCatEmoji(c.icon)} {c.name}</option>
+                  <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
               </select>
               <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500 pointer-events-none" />
@@ -696,7 +699,6 @@ function BudgetCard({ budget, onEdit, onDelete, onAnalyze, onQuickAdd, onCopy }:
   const catColor = budget.category?.color ?? '#818cf8';
   const displayPct = Math.min(budget.pct, 100);
   const burnCfg = BURN_CFG[budget.burnRate.status];
-  const catEmoji = getCatEmoji(budget.category?.icon);
   const isActive = budget.daysRemaining > 0 && new Date(budget.startDate) <= new Date();
   const predictedOverBudget = budget.predictedSpend > budget.amount;
 
@@ -709,9 +711,9 @@ function BudgetCard({ budget, onEdit, onDelete, onAnalyze, onQuickAdd, onCopy }:
         {/* Header */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2.5 flex-1 min-w-0">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-xl"
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
               style={{ backgroundColor: `${catColor}20`, border: `1px solid ${catColor}35` }}>
-              {catEmoji}
+              <CatIcon iconName={budget.category?.icon} color={catColor} size={20} />
             </div>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-slate-100 truncate">{budget.displayName}</p>
@@ -1329,7 +1331,7 @@ export default function Budgets() {
               className="bg-surface-950 border border-slate-800 rounded-xl pl-3 pr-7 py-1.5 text-xs text-slate-300 outline-none appearance-none cursor-pointer">
               <option value="all">Tất cả danh mục</option>
               {categories.filter(c => !['cat-09','cat-10'].includes(c.id)).map(c => (
-                <option key={c.id} value={c.id}>{getCatEmoji(c.icon)} {c.name}</option>
+                <option key={c.id} value={c.id}>{c.name}</option>
               ))}
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-500 pointer-events-none" />

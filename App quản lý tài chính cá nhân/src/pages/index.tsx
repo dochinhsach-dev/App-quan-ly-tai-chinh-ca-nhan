@@ -25,6 +25,6 @@ function ComingSoon({ title }: { title: string }) {
   );
 }
 
-export function Reminders()    { return <ComingSoon title="Nhắc nhở & Lịch hóa đơn" />; }
+export { default as Reminders } from './Reminders';
 export function SettingsPage() { return <ComingSoon title="Cài đặt" />; }
 

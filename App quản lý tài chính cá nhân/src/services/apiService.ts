@@ -6,6 +6,7 @@ import type {
   Transaction, Budget, Category,
   Alert, AIInsight, FinancialGoal,
   UserProfile, HealthScore, SpendingHabit,
+  Reminder,
 } from '../types/finance';
 
 const BASE = 'http://localhost:3001';
@@ -130,6 +131,17 @@ export const spendingHabitsApi = {
     get<(WithUserId<SpendingHabit> & { id: string })[]>(`/spendingHabits?userId=${encodeURIComponent(userId)}`),
   create: (sh: WithUserId<SpendingHabit>) =>
     post<WithUserId<SpendingHabit> & { id: string }>('/spendingHabits', sh),
+};
+
+// ── Reminders ─────────────────────────────────────────────────────
+export const remindersApi = {
+  getByUser: (userId: string) =>
+    get<WithUserId<Reminder>[]>(`/reminders?userId=${encodeURIComponent(userId)}`),
+  create: (reminder: WithUserId<Omit<Reminder, 'id'>>) =>
+    post<WithUserId<Reminder>>('/reminders', reminder),
+  update: (id: string, updates: Partial<Reminder>) =>
+    patch<WithUserId<Reminder>>(`/reminders/${id}`, updates),
+  remove: (id: string) => del(`/reminders/${id}`),
 };
 
 // ── Check if json-server is running ──────────────────────────────

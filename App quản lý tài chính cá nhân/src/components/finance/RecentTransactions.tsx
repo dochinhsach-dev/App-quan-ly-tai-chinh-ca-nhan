@@ -144,7 +144,13 @@ export default function RecentTransactions({ limit = 8 }: { limit?: number }) {
       <div className="divide-y divide-slate-800/50">
         {filtered.length === 0 ? (
           <div className="py-10 text-center">
-            <p className="text-slate-500 text-sm">Không tìm thấy giao dịch nào</p>
+            <p className="text-slate-400 text-sm">Chưa có giao dịch nào</p>
+            <a
+              href="/transactions"
+              className="inline-block mt-2 text-xs text-brand-400 hover:text-brand-300 font-semibold"
+            >
+              + Thêm giao dịch đầu tiên
+            </a>
           </div>
         ) : (
           filtered.map((tx) => {
